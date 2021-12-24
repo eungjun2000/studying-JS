@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> How to make HTTP, cookie, web storage </title>
+        <!-- 25. 초기 웹은 HTML 페이지나 이미지, 사용자 데이터, 웹 서비스 중간에 발생하는 일시적인 데이터 등 모든 정보를 웹 서버
+                 에 저장하도록 설계되었다. 그러므로 웹 브라우저는 웹 서버로부터 데이터를 받아 사용자 화면에 출력하는 기능만을 담
+                 당하였다. 그 후 웹의 사용이 폭발적으로 늘어나게 되어, 웹 서버의 저장 부담이 커지고 웹 브라우저와 웹 서버 사이의
+                 트래픽도 증가해 웹 서비스 효율이 나빠지게 되었다. 이 문제를 해결하기 위해 HTML5에서는 웹 브라우저가 실행되는 사
+                 용자 컴퓨터에도 데이터를 저장해두는 다양한 저장 기능을 마련했다. 그 저장 기능은 아래와 같은 종류가 있다.
+                 ----------------------------------------------------------------------------------------------------------
+                 ※ 쿠키(Cookie)
+                 ※ 웹 스토리지(Web storage)
+                 ※ 로컬 파일(Local file)
+                 ※ 인덱스드 데이터베이스(Indexed database)
+                 
+                 Q. 브라우저와 웹 서버 사이에는 HTML 자원을 주고받는 절차와 형식을 정한 HTTP 통신 규격이 있다. 브라우저가 웹 서버
+                    에 연결한 뒤 필요한 자원에 대한 HTTP 요청을 보내면, 웹 서버가 응답하는 식이다. 그렇다면 형식은 무엇이 있는가?
+                 -----------------------------------------------------------------------------------------------------------
+                    ※ Connectionless Protocol - HTTP/1.0
+                    ※ Keep Alive - HTTP/1.0 & HTTP/1.1
+                    ※ Persistent Connection - HTTP/1.1
+        -->
+        <script>
+        function GetCookie(name){
+            var pairs = document.cookie.split(";");
+            for(var i=0; i<pairs.length; i++){
+                var pair = pairs[i].trim();
+                var unit = pair.split("=");
+                if(unit[0] == name){
+                    return unescape(unit[1]);
+                }
+            }
+            return null;
+        }
+        function SetCookie (name, value, expireDate){
+            var cookieStr = name + "=" + escape(value) + ((expireDate==null)? "" : ("; expires=" + expireDate.toGMTString()));
+        }
+        var username = GetCookie("username");
+        var count = GetCookie("count");
+        var expire = new Date();
+        if(username == null){
+            count = 0;
+            username = prompt("Input name", "");
+            if(username == null){
+                alert("You can get better service if you input your name.");
+                username = "Whatever";
+            }else{
+                expire.setTime(expire.getTime() + (365*24*3600*1000));
+                SetCookie("username", username, expire);
+            }
+        }
+        count++;
+        expire.setTime(expire.getTime() + (365*24*3600*1000));
+        SetCookie("count", count, expire);
+        document.write("<p>Welcome. " + username + ". You visit " + count + " times." + "<hr>");
+        /* 26. 쿠키란 웹 서버가 브라우저에게 지시하여 사용자의 로컬 컴퓨터에 저장하는 4KB 이하의 작은 데이터이다. 기본적으로 브라우저
+               와 웹 서버 사이의 데이터 통신은 무상태(stateless) 프로토콜이다. 예로 웹 서버는 사용자가 방금 무언가를 검색한 다음, 바
+               로 다음에 무언가를 검색하게 되면 방금 전에 검색했던 것이 무엇인지 인지하지 못하는데, 웹 서버는 각 요청을 개별적으로 처
+               리하기 때문에 연속된 두 요청을 연관시키는 기능이 없다. 이를 무상태라고 부른다. 쿠키는 이러한 문제를 해결하기 위해서 쿠
+               키를 도입했다. 쿠키는 다음과 같은 특성을 갖게 된다.
+               ----------------------------------------------------------------------------------------------------------------
+               ※ 쿠키는 누가 언제 만드는가? : 브라우저가 처음 접속해올 때 웹 서버가 만들어 브라우저에게 보낸다.
+               ※ 쿠키는 누가 어디에 저장하는가? : 브라우저가 로컬 컴퓨터에 파일 형태로 저장한다.
+               ※ 쿠키는 언제 사용되는가? : 브라우저가 웹 서버에게 보내는 모든 요청에 삽입하여 전송한다.
+               ※ 쿠키는 누가 어떤 목적으로 사용하는가? : 웹 서버가 사용자의 연속된 요청들을 인식하기 위해서 사용한다.
+               
+               Q. 쿠키 데이터의 구성은 어떻게 되는가? 아래와 같이 6개의 정보를 보낸다.
+               ----------------------------------------------------------------------------------------------------------------
+                  name=value; Expires=[Date]; Domain=[Domain]; Path=[Path]; [Secure]; HttpOnly
+                  -------------------------------------------------------------------------------------------------------------
+                  ※ name=value : 쿠키 이름과 쿠키 값. 쿠키가 웹 서버로 전송될 때는 이 값만 전송된다.
+                  ※ Expires=[Date] : 쿠키의 유효시간
+                  ※ Domain=[Domain] : 쿠키를 필요로 하는 웹 서버 도메인
+                  ※ Path=[Path] : 쿠키를 필요로 하는 웹 페이지 경로명
+                  ※ [Secure] : 암호화한 경우에만 쿠키 전송 가능
+                  ※ HttpOnly : HTTP 통신 외에 다른 통신으로 쿠키 전송 불허
+
+               ※ 브라우저가 접속한 웹 사이트의 모든 쿠키들은 "document.cookie" 프로퍼티에 문자열 형태로 연결되어 있다.
+        */
+        </script>
+    </head>
+
+    <body>
+        Item name : <input id="item" type="text">
+        Count : <input id="count" type="text">
+                <button id="save" onclick="store()">Store</button>
+                <button id="retrieve" onclick="retrieve()">Retrieve</button><p>
+                Local storage change context :<br>
+                <textarea id="textarea" cols="60" rows="6"></textarea>
+        <script>
+            /* 27. 무상태 프로토콜의 문제점을 해결하기 위해 쿠키를 도입했으나, 쿠키는 브라우저가 웹 서버에 요청을 할 때마다 함께 전송
+                   되므로(예로 브라우저에 네이버를 띄울라면 77번의 요청이 이루어진다.) 상당한 네트워크 트래픽이 발생하게 된다. 더군다
+                   나 쿠키는 4KB로 크기가 제한되어, 충분한 양의 정보를 저장하는데는 무리가 있다. 로컬 데이터에 데이터를 저장하기 위해
+                   쿠키를 사용할 수 있으나 이와 같은 문제점이 존재한다. 이를 해결하기 위해 웹 스토리지의 개념이 등장했다. 특징은 다음
+                   과 같다. 참고로 웹 스토리지는 DOM 스토리지라고도 불린다.
+                   ------------------------------------------------------------------------------------------------------------
+                   ※ 웹 스토리지는 문자열만 저장한다. 그러므로 숫자도 문자열로 바꾸어 저장해야 한다.
+                   ※ 웹 스토리지에 저장되는 단위는 (키, 값)으로 구성된 아이템이다. 키를 이용해 아이템을 검색하면, 값이 반환된다.
+                   ※ 키 값은 중복될 수 없으며, 키와 값 문자열은 대소문자를 구분한다.
+                   ※ 웹 스토리지의 조작은 자바스크립트 코드로만 가능하다.
+                   ※ 웹 스토리지는 세션 스토리지(Session Storage)와 로컬 스토리지(Local Storage)로 나뉜다.
+
+                   Q. 세션 스토리지란 무엇인가?
+                   ------------------------------------------------------------------------------------------------------------
+                      세션 스토리지는 세션이 생길 때 생성되며, 세션 종료 시 소멸되는 저장소이다. 세션이란 브라우저 윈도우와 웹 사이트
+                      가 연결된 상황을 지칭한다. 예로 구글 사이트에 접속하면, 윈도우와 구글 사이트 사이에 세션이 생성되는데 이 세션에
+                      서만 사용할 수 있는 세션 스토리지가 만들어진다. 윈도우가 사리지면, 세션 스토리지도 소멸된다. 세션 스토리지는 윈
+                      도우에 연결된 웹 사이트의 모든 웹 페이지들이 공유하지만 여러 개의 윈도우가 동일하거나 다른 웹 사이트에 접속하는
+                      경우 윈도우마다 세션 스토리지가 별도로 생성되며, 서로 간섭할 수 없다. 윈도우에 연결된 웹 사이트들이 주고받는 임
+                      시 테이터를 로컬 컴퓨터에 일시적으로 저장하기 위해 사용된다. 
+
+                   Q. 로컬 스토리지란 무엇인가?
+                   ------------------------------------------------------------------------------------------------------------
+                      로컬 스토리지는 윈도우에 상관없이 웹 서버(웹 사이트) 당 하나씩 생성된다. 예로 윈도우에서 구글 사이트를 로드하면
+                      로컬 컴퓨터에 구글 로컬 스토리지가 생긴다. 그리고 다른 윈도우에서 다시 구글 사이트를 로드하면, 이미 만들어져 있
+                      는 구글 로컬 스토리지가 공유된다. 윈도우가 닫히든, 브라우저를 종료되든, PC가 꺼져든 로컬 스토리지는 절대 소멸되
+                      지 않는다. 이러한 특징으로 인해, 로컬 스토리지를 사용한다면 웹 사이트에 연결하지 않고도, 즉 오프라인 상태에서도
+                      웹 애플리케이션이 로컬 스토리지를 활용할 수 있다.
+            */
+            
+            var item = document.getElementById("item");
+            var count = document.getElementById("count");
+
+            function store(){
+                if(!window.localStorage){
+                    alert("We do not supply session storage.");
+                    return;
+                }
+                localStorage.setItem(item.value, count.value); // == localStorage["item.value"] = "count.value";
+            }
+            function retrieve(){
+                if(!window.slocalStorage){
+                    alert("We do not supply session storage.");
+                    return;
+                }
+                var val = localStorage.getItem(item.value);
+                if(val == null){
+                    alert(item.value + " is not in the list");
+                }else{
+                    count.value = val;
+                }
+            }
+            /* 28. Storage 인터페이스를 사용하면 자바스크립트 코드로 웹 스토리지를 읽고 쓸 수 있다. Storage 인터페이스는 아래와 같은
+                   메소드로 구성된다. 세션 스토리지나 로컬 스토리지나 모두 동일한 Storage 인터페이스로 접근한다. 
+            -------------------------------------------------------------------------------------------------------------------
+                   ※ key(index) : index 위치에 저장된 아이템의 키 문자열을 반환한다.
+                   ※ setItem(key, val) : (key, val) 아이템을 스토리지에 저장한다. 
+                   ※ getItem(key) : 문자열 key의 아이템을 찾아 값(val) 문자열을 리턴한다. 없으면 null을 리턴한다.
+                   ※ removeItem(key) : 문자열 key의 아이템을 삭제한다.
+                   ※ clear() : 스토리지의 모든 아이템을 삭제한다.
+
+                   또한, 브라우저 윈도우에 웹 페이지가 로드되면, 로컬 컴퓨터에는 세션 스토리지와 로컬 스토리지가 자동 생성되며 이들은
+                   각각 sessionStorage와 localStorage 자바스크립트 객체로 접근할 수 있다.
+            */
+
+            window.addEventListener("storage", storageEventListener, false);
+            function storageEventListener(e){
+                var eventDetail = "key:\t\t\t" + e.key + " \n" +
+                                  "oldValue:\t\t" + e.oldValue + "\n" +
+                                  "newValue:\t\t" + e.newValue + "\n" + 
+                                  "storageArea\t" + e.storageArea + "\n" + 
+                                  "url\t\t\t" + e.url;
+                document.getElementById("textarea").innerHTML = eventDetail;
+            }
+            /* 29. 세션이나 로컬 스토리지에 아이템을 추가하거나 삭제, 값 변경 등 스토리지에 변화가 생길 때, 브라우저는 storage 이벤트
+                   를 발생시켜 스토리지를 변경한 윈도우를 제외한 다른 모든 윈도우에게 전달한다. storage 이벤트가 발생하면 아래의 프로
+                   퍼티로 구성된 StoreageEvent 타입의 이벤트 객체가 생성된다. 참고로, storage 이벤트는 window 객체만 받을 수 있다.
+            --------------------------------------------------------------------------------------------------------------------
+                   ※ key : 변화가 발생한 아이템의 키 문자열. clear()의 실행으로 이벤트가 발생한 경우는 null
+                   ※ newValue : 변화가 발생한 아이템의 새 값 문자열. clear()의 실행으로 이벤트가 발생한 경우는 null
+                   ※ oldValue : 변화가 발생한 아이템의 이전 값 문자열. clear()의 실행으로 이벤트가 발생한 경우는 null
+                   ※ storageArea : 이벤트가 발생한 웹 스토리지 객체
+                   ※ url : 이벤트를 유발한 웹 페이지의 URL
+
+                   참고로, 대부분의 브라우저는 로컬 컴퓨터의 웹 페이지를 로드한 경우 보안 문제로 storage 이벤트를 발생시키지 않는다.
+            */
+        </script>
+    </body>
+</html>

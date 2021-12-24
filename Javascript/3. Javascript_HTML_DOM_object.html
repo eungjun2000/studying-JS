@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Javascript - HTML DOM object </title>
+        <!-- 40. 브라우저는 HTML 페이지를 로드하는 과정에서 각 HTML 태그들을 하나의 객체로 만든다. 예로 <p></p>로 구성된 요소는 p
+                 객체로 생성하고, <div></div>는 div 객체로 생성하는 식이다. 이들은 HTML 문서의 각 요소들을 객체화한 것이라는 뜻으
+                 로 HTML DOM 객체라 부른다. 이러한 HTML 태그들이 HTML 페이지에 출력된 후, HTML 태그가 출력될 모양과 콘텐츠를 제어
+                 하기 위한 것이 HTML DOM의 목적이자 필요한 이유이다. 제어할 수 있는 이유는 브라우저의 동작 원리 때문인데, 브라우저
+                 HTML 태그로부터 DOM 객체를 생성해 트리를 구성하고 사라지며, 우리는 DOM 객체만을 화면으로 보는 것이다. 즉 브라우저
+                 에는 DOM 객체와 DOM 트리만 존재한다. 그러므로 자바스크립트로 DOM 객체를 제어하면 그에 따라 즉각 브라우저 화면에 H
+                 TML 태그의 모양이나 콘텐츠가 바뀌는 것이다.
+
+                 Q. 톰 트리(DOM tree)란 무엇인가?
+                 ------------------------------------------------------------------------------------------------------------
+                    브라우저는 HTML 페이지를 로드하면서 HTML 태그의 포함 관계에 따라 DOM 객체들을 트리 구조로 만드는데, 이것을 DOM
+                    tree라 부른다. 아래와 같은 특징이 있다.
+                    ---------------------------------------------------------------------------------------------------------
+                    ※ DOM 트리의 루트는 document 객체이다. 허나, document는 DOM 객체가 아니다.
+                    ※ DOM 객체는 HTML 객체 종류만큼 있으며, 태그 이름이 같더라도 HTML 태그 당 DOM 객체가 하나씩 생성된다.
+                    ※ DOM 트리는 HTML 태그의 포함관계에 따라 부모 자식 관계로 구성된다.   
+
+                 Q. DOM 객체의 구성 요소는 무엇이 있는가?
+                 ------------------------------------------------------------------------------------------------------------
+                    ※ 프로퍼티 : DOM 객체의 멤버 변수로서 HTML 태그의 속성들을 반영한다. DOM 객체 프로퍼티로부터 태그의 속성을 알
+                                 아내거나 값을 바꾸어 변화를 줄 수 있다.
+                    ※ 메소드 : DOM 객체의 멤버 함수로서 HTML 태그를 제어하는데 쓰인다.
+                    ※ 컬렉션 : 정보를 집합적으로 표현하는 일종의 배열이다.
+                    ※ 이벤트 리스너 : DOM 객체는 HTML 태그에 작성된 이벤트 리스너를 그대로 가진다.
+                    ※ CSS3 스타일 : DOM 객체는 style 프로퍼티를 통해 HTML 태그에 적용된 CSS 스타일 시트에 접근할 수 있다.
+        -->
+
+        <script>
+            function change(){
+                var span = document.getElementById("mySpan");
+                /* 41. getElementById()는 document가 가진 프로퍼티 중 하나로, 주어진 id 값을 가진 첫 번째 DOM 객체를 리턴한다. */
+                span.style.color="green";
+                span.style.display="block";
+                span.style.fontSize="30px";
+            }
+            /* 42. style 객체로 DOM 객체의 style 프로퍼티에로 접근이 가능하며, 이미 출력된 태그의 모양을 바꿀 수 있다. */
+
+            function java(){
+                var p = document.getElementById("java_img");
+                p.innerHTML = "Java image : <img src='C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Java.PNG'>";
+            }
+            /* 43. innerHTML 프로퍼티는 시작과 종료 태그 사이에 있는 HTML 컨텐츠를 나타낸다. */
+
+            function ths(obj, size, color){
+                obj.style.color = color;
+                obj.style.fontSize = size;
+            }
+            /* 44. this는 객체 자기 자신을 가리키며, DOM 객체에서 객체 자기 자신을 가리킨다. */
+
+            /* ########################################### document 메소드 부분 ########################################### */
+            function doc_method(){
+                var spanArray = document.getElementsByTagName("a");
+                for(var i=0; i<spanArray.length; i++){
+                    var span = spanArray[i];
+                    span.style.color = "orchid";
+                    span.style.fontStyle = "20px";
+                }
+            }
+            /* 45. getElementByTagName() 메소드는 동일한 HTML 태그 이름을 가진 DOM 객체들을 찾아 컬렉션으로 만들어 리턴한다. 
+                   컬렉션은 []와 인덱스를 이용해 각 원소를 접근할 수 있다.
+
+                   ※ 기타 DOM 객체를 찾는 document 메소드들은 아래와 같은 것들이 있다.
+                   -----------------------------------------------------------------------------------------------------
+                      getElementByClassName() : 주어진 class 속성 값을 가진 모든 태그(DOM 객체)의 컬렉션을 리턴한다.
+                      getElementByName() : 주어진 name 속성 값을 가진 모든 태그(DOM 객체)의 컬렉션을 리턴한다.
+                      getElementById() :주어진 id 속성 값을 가진 첫 번째 DOM 객체를 리턴한다.
+            */
+
+            var win=null;
+            function showHTML(){
+                if(win == null || win.closed){
+                    win = window.open("", "outWin", "width=300, height=200");
+                }
+                var textarea = document.getElementById("srcText");
+                win.document.open();
+                win.document.write(textarea.value);
+                win.document.close();
+            }
+            /* 46. 현재 브라우저 윈도우에 출력된 HTML 텍스트를 지워버리고 새로운 내용을 출력하거나, 지울 수 있다. 새로운 내용을
+                   출력하기 위해서는 open() 메소드를 이용해 document 객체를 열어야한다. 그리고 write()로 HTML 텍스트를 쓰고 cl
+                   ose() 메소드를 호출해 document 객체를 닫는다. 메소드들은 아래와 같다.
+                   -------------------------------------------------------------------------------------------------------
+                   ※ close() : document 객체에 있는 HTML 콘텐츠를 브라우저에 출력하고, 더 이상 쓰기를 받지 않는다.
+                   ※ open() : documnet에 담긴 콘텐츠를 모두 지우고, 새로운 HTML 콘텐츠를 쓸 수 있도록 연다.     
+            */
+
+            function createDIV(){
+                var obj = document.getElementById("parent");
+
+                var newDIV = document.createElement("div");
+                newDIV.innerHTML = "This is newly created DIV tag";
+                newDIV.setAttribute("id", "myDIV");
+                newDIV.style.backgroundColor = "yellow";
+                /* == <div id="myDiv" style="background-color:yellow">This is newly created DIV tag</div> */
+
+                newDIV.addEventListener("click",
+                            function(){
+                                var p = this.parentElement;
+                                p.removeChild(this);
+                            });
+                obj.appendChild(newDIV);
+            }
+            /* 47. HTML 문서의 로드가 완료된 document에 새로운 HTML 태그를 추가할 수 있다. HTML 태그를 나타내는 DOM 객체를 생성해
+                   DOM 트리에 "부모.appendChild(DOM 객체)"를 이용해 직접 삽입해야 한다. 삭제할 땐 "부모.removeChild(DOM 객체)"를
+                   이용해 부모로부터 자식 객체를 떼어낼 수 있다.
+            */
+            /* ############################################################################################################ */
+        </script>
+    </head>
+
+    <body id="parent">
+        <p style="color:blue" >This is <span id="mySpan" style="color:red">Sentence.</span></p>
+        <input type="button" value="Change style" onclick="change()"><hr>
+
+        <p id="java_img" style="color:blue" onclick="java()">Click <span style="color:red">here</span></p><hr>
+
+        <button onclick="ths(this, '30px', 'red')">button</button><hr>
+        
+        <button onclick="doc_method()">Click here</button>
+        I love fruit. Especially <a>apple</a>. Also I alse like <a>banana</a>. But I don't like <a>Cherry</a>.<hr>
+
+        <textarea id="srcText" rows="10" cols="50"></textarea><br>
+        <button onclick="showHTML()">Show HTML document</button><hr>
+
+        <!-- ########################################### document 프로퍼티 부분 ########################################### -->
+        <script>
+            document.write("location = " + document.location + "<br>");
+            /* 48. location 프로퍼티는 현재 문서의 URL 정보를 가진 loaction 객체의 레퍼헌스를 리턴한다. */
+            document.write("URL = " + document.URL + "<br>");
+            /* 49. URL 프로퍼티는 현재 문서의 URL을 리턴한다. */
+            document.write("title = " + document.title + "<br>");
+            /* 50. title 프로퍼티는 문서의 제목 문자열을 리턴한다. */
+            document.write("head id = " + document.head.id + "<br>");
+            /* 51. head 프로퍼티는 head 객체에 대한 레퍼런스를 리턴한다. */
+            document.write("body = " + document.body + "<br>");
+            /* 52. body 프로퍼티는 body 객체에 대한 레퍼런스를 리턴한다. */
+            document.write("domain = " + document.domain + "<br>");
+            /* 53. domain 프로퍼티는 서버의 도메인 이름을 리턴한다. */
+            document.write("lastModified = " + document.lastModified + "<br>");
+            /* 54. lastModified 프로퍼티는 MM/DD/YYYY hhmmss 형식의 문서 최근 수정 시간을 리턴한다. */
+            document.write("defaultView = " + document.defaultView + "<br>");
+            /* 55. defaultView 프로퍼티는 문서가 출력된 브라우저 윈도우에 대한 레퍼런스를 리턴한다. */
+            document.write("readyState = " + document.readyState + "<br>");
+            /* 56. readyState 프로퍼티는 문서의 현재 로딩 상태를 나타내는 문자열을 리턴한다. */
+            document.write("referrer = " + document.referrer + "<br>");
+            /* 57. referrer 프로퍼티는 이 HTML 문서를 로드한 원래 문서의 URL 문자열을 리턴한다. */
+            document.write("activeElement = " + document.activeElement.value + "<br>");
+            /* 58.activeElement 프로퍼티는 문서가 포커스를 받을 때 문서 내 포커스를 받는 자식 객체를 리턴한다. */
+            document.write("documentElement = " + document.documentElement.tagName + "<hr>");
+            /* 59. documentElement 프로퍼티는 html 객체에 대한 레퍼런스를 리턴한다. */
+        </script>
+        <!-- ############################################################################################################# -->
+        <a href="Javascript:createDIV()">Create DIV tag</a>
+    </body>
+</html>

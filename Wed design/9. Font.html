@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\FlowType.JS-master\FlowType.JS-master\flowtype.js"></script>
+        <style>
+            .wrapper{font-size : 10px;}
+            .txt_em{font-size : 2em;}
+            /* 17. 웹 사이트에서 font-size 속성을 이용해 폰트 크기를 지정할 때 px 단위를 사용하는 경우가 있는데, 사실 px는 폰트 크기가 화면에
+                   따라서 달라지지 않고 고정되기에 여러 기기에서 접속해서 보는 경우는 적합하지 않다. 따라서 모든 기기를 반영해야 하는 반응형 웹
+                   이라면 px 단위보다는 상대 크기로 표시하는 폰트 단위인 em 단위를 사용하는 것이 좋다.
+            */
+
+            .txt_rem{font-size : 2rem;}
+            
+            @font-face{
+                font-family : "MaplestoryOTFLight";
+                src : url(*),
+                      url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.ttf") format("truetype"),
+                      url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.otf") format("opentype"),
+                      url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff") format("woff"),
+                      url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.eot");
+            }
+            #MOL{font-family : "MaplestoryOTFLight";}
+            /* 21. 웹 폰트는 자신이 가지고 있는 웹 폰트 파일을 사용할 수도 있으나, 웹 폰트 사이트에서 제공하는 웹 폰트 파일을 링크해서 사용할 수
+                   있다. 이 때는 CSS의 @font-face 속성을 사용한다. 문법은 아래와 같다.
+                   -------------------------------------------------------------------------------------------------------------------
+                   @font-face{
+                       font-family : 폰트 이름;
+                       src : url(폰트 파일 경로) format(파일 유형);
+                   }
+                   -------------------------------------------------------------------------------------------------------------------
+                   ※ 웹 폰트는 화면에 표시할 수 있는 형식이 브라우저 종류에 따라 ttf, otf, eot, svg, woff 등이 존재한다. format에 값을 명시적 
+                      으로 작성하면 이 형식을 지원하는 브라우저만 글꼴을 내려받게 되어 있다. 이미 사용자 시스템에 설치되어 있을 경우를 대비해 url
+                      (*)을 주면 불필요하게 글꼴을 내려받는 것을 막을 수 있다.
+            */
+
+            @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+            #Roboto{font-family : "Roboto";}
+            /* 22. 웹 폰트는 웹 브라우저에 따라 여러 형태(ttf, woff, ...)의 폰트 파일이 필요하다. 또한 웹 폰트 역시 라이선스가 있으므로 사용하려
+                   면 돈을 내고 구입해야 한다. 이런 불편함을 줄여주기 위해 구글에서는 무료로 배포하는 구글 웹 폰트가 있다. 위는 구글에서 제공하는
+                   "Roboto"라는 이름의 무료 폰트이다.
+            */
+        </style>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="txt_em">em
+                <div class="txt_em">em2
+                    <div class="txt_em">em3</div>
+                </div>
+            </div>
+            <!-- 18. em 단위는 부모 요소의 크기를 기준으로 요소 크기가 달라진다. 예로 "txt1" 클래스 이름을 가진 <div> 태그를 감싸는 부모 요소
+                     인 "wrapper" 클래스 이름을 가진 <div> 태그는 폰트 크기가 20px이다. 이렇게 되면 자식인 "txt1"은 폰트의 크기가 10*2 = 20
+                     이 된다. 부모가 여러 단계 중첩이 되면 자식 요소 글자 크기도 점점 커진다. 즉 em2 글자는 10*2*2 = 40의 크기를 갖는다.
+            -->
+
+            <div class="txt_rem">rem
+                <div class="txt_rem">rem2
+                    <div class="txt_rem">rem3</div>
+                </div>
+            </div>
+            <!-- 19. rem 단위는 부모 요소의 크기를 기준으로 글자 크기가 바뀌는 em의 부작용을 막기 위한 단위이다. rem은 오로지 최상위(root)에서
+                     지정한 크기를 기준 값으로 사용한다. 즉 중첩되더라도 "wrapper" 클래스 이름을 가진 <div> 태그에만 영향을 받는다. rem, rem1
+                     과 rem3는 모든 크기가 10*2 = 20의 값으로 고정된다.
+            -->
+        </div><hr>
+
+        <h1>What does FlowType.JS do?</h1>
+        <p>Ideally, the most legible typography contains between 45 and 75 characters per line.
+           This is difficult to accomplish for all screen widths with only CSS media-queries.
+           FlowType.JS eases this difficulty by changing the font-size and line-height based on a specific element's width.
+           This allows for a perfect character count per line at any screen width.</p>
+        <h1>Options</h1>
+        <h2>Thresholds</h2>	
+        <p>Set minimum and maximum width thresholds to control the FlowType.JS magic within specific element widths.<br>
+           In this example, FlowType.JS will stop resizing text once the element width becomes smaller than 500px or larger than 1200px.</p>
+        
+        <script>
+            $("body").flowtype();
+        </script>
+        <!-- 20. 보통 반응형 웹에서는 요소 너비가 달라져도 글자 크기는 변하지 않고 자동으로 줄바꿈이 되는데, flowtype 플러그인을 사용하면 요소
+                 너비를 기준으로 원래 줄 형태를 유지하기 위해 글자의 크기 자체가 달라진다. </body> 앞에 함수 코드를 추가해야 한다.
+        -->
+
+        <h3 id="MOL">MaplestoryOTFLight Font</h3>
+        <h3 id="Roboto">Roboto font</h3>
+    </body>
+</html>

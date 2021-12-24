@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> HTML - Hyperlink, inline frame </title>
+    </head>
+
+    <body>
+        <a href="http://naver.com">Naver</a><br><hr>
+        <!-- 22. <a> 태그의 href 속성으로 하이퍼링크를 설정할 수 있다. 문법은 아래와 같다. 
+        ----------------------------------------------------------------------------------------------------------
+                 <a href = "URL" | "URL#앵커이름" | "#앵커이름" target = "타겟속성" download> 문자열 또는 이미지 </a>
+        -->
+        
+        <ul>
+            <li><a href="#love">Love me tender</a>
+            <li><a href="#it">It's now or never</a>
+        </ul>
+        
+        <h3 id="love">Love me tender</h3>
+        Love me tender,<br>
+        Love me sweet,<br>
+        Never let me go.<br>
+        <h3 id="it">It's now or never</h3>
+        It's now or never,<br>
+        Come hold me tight,<br>
+        Kiss me my darling.<br><hr>
+        <!-- 23. <a href> 태그의 첫 속성인 "#앵커이름"은 <a href="#앵커이름"> 형식으로 앵커에 연결하는 하이퍼링크를 만든다. 
+                 연결되는 앵커의 형식은 <id="앵커이름">이다. 문서를 쉽게 읽을 수 있도록 제공된 기능이다.
+        -->
+
+        <a href="http://naver.com" target="_blank">Naver</a><br>
+        <a href="http://naver.com" target="_self">Naver</a><br><hr>
+        <!-- 24. <a href> 태그의 두번째 속성인 "target"은 링크에 연결될 웹 페이지가 출력될 윈도우를 지정한다. 5 종류가 있다. 여기서는
+                 _blank(새 탭에서 웹 페이지 출력), _self(현재 탭에서 웹 페이지 출력)만을 본다. 나머지는 <iframe>에서 본다.
+        -->
+        
+        <a href="C:\Users\tera\Desktop\Vscode_Test_01\Java.png" download>Download Image</a><br><hr>
+        <!-- 25. <a href> 태그의 마지막 속성인 "download"는 이미지, pdf, mp3 등의 모든 파일을 다운로드할 수 있는 링크를 만든다. -->
+
+        <iframe src="http://www.etnews.com" width="300" height="300"></iframe>
+        <iframe src="http://www.mk.co.kr" width="300" height="300"></iframe>
+        <iframe src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Practice_files_for_ex\iframe1.html" width="100" height="150"
+                     srcdoc="<html><head></head><body>This is scrdoc</body></html>"></iframe><br>
+        <!-- 26. <iframe>은 현재 HTML 페이지 내에 내장 윈도우를 만들고 다른 HTML 페이지를 출력할 수 있다. 문법은 아래와 같다. 
+        -------------------------------------------------------------------------------------------------------------------------
+                 <iframe src = "URL" srcdoc = "HTML 문서 텍스트" name = "윈도우 이름" width = "폭" height ="높이"> 문자열 </iframe>
+                 ----------------------------------------------------------------------------------------------------------------
+                 ※ name : 프레임 윈도우의 이름이다. 다른 웹 페이지에서 target 속성 값으로 사용된다.
+                 ※ <iframe> 태그는 <body> 태그 내에서만 사용된다.
+                 ※ srcdoc 속성에 무언가를 작성하면 src 속성은 무시된다.
+                 ※ 대부분의 포털 사이트는 Clickjaking 웹 침입을 막기 위해 인라인 프레임에 출력되는 것을 막는다.
+        -->
+        
+        <iframe src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Practice_files_for_ex\iframe1.html" 
+                name="left" width="100" height="500"></iframe>
+        <iframe src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Practice_files_for_ex\iframe2.html"
+                name="right" width="400" height="500"></iframe><hr>
+        <!-- 27. <iframe> 태그의 세 번째 속성인 "name"은 브라우저 프레임 속에 삽입된 인라인 프레임 간의 상속 관계를 갖게 한다. 4 종류가 있다.
+        -------------------------------------------------------------------------------------------------------------------------------
+                 ※ left : 브라우저 윈도우(top 또는 부모)의 자식 프레임 윈도우
+                 ※ right : 브라우저 윈도우(top 또는 부모)의 자식 프레임 윈도우
+                 ※ upper : right 윈도우의 자식 프레임 윈도우
+                 ※ lower : right 윈도우의 자식 프레임 윈도우
+        -->
+
+        <iframe src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Practice_files_for_ex\iframe3.html" width="200" height="300"></iframe>
+        <!-- 28. "target" 속성은 <a>, <base> 등의 태그에서 웹 페이지를 출력할 윈도우 또는 인라인 프레임을 지정한다. 5 종류가 있다. 
+        ---------------------------------------------------------------------------------------------------------------------
+                 ※ _blank : 새로운 브라우저 윈도우(탭)에서 웹 출력
+                 ※ _self : 현재 윈도우에서 웹 출력 
+                 ※ _top : 최상위 브라우저에서 웹 출력
+                 ※ _parent : 부모 윈도우에서 웹 출력
+                 ※ 윈도우 이름 : 해당 이름의 윈도우에서 웹 출력
+        -->
+    </body>
+</html>

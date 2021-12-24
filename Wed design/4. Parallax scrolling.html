@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\fullPage.js-master\fullPage.js-master\src\fullpage.js"></script>
+        <script src="C:\Web_Plugin\Parallax-Scroll-master\Parallax-Scroll-master\src\jquery.parallax-scroll.js"></script>
+        <style>
+            *, html{margin:0; padding:0; scroll-behavior : smooth;}
+            h3, p{font-family: "맑은 고딕", 돋움, 굴림;}
+            .container{
+                position:relative;	
+                cursor:pointer;
+                min-height:730px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size:cover;
+                overflow:hidden;
+                margin:0;
+            }
+            #navi{
+                position:fixed;
+                width:100vw;
+                z-index:1;
+                background:#e9592c;	
+            }
+            #navi h1{
+                float:left;
+                padding:10px 0 0 15px;
+            }
+            .main-nav{
+                position:relative;
+                float:left;
+                height:50px;
+                margin:5px 0 0 50px;
+            }
+            .main-nav li{
+                list-style:none;	
+                display:inline-block;
+                margin:12px 30px;
+            }
+            .main-nav a{
+                color: #fff;
+                font-family:Arial;
+                font-size:20px;
+                text-decoration: none;
+            }
+            #ms1{background-image:url('C:/Users/eungj/Downloads/Img_for_web/Europe.jpg');}
+            #ms2{background-image:url('C:/Users/eungj/Downloads/Img_for_web/Korea.jpg');}
+            #ms3{background-image:url('C:/Users/eungj/Downloads/Img_for_web/China.jpg');}
+            .bg-holder{
+                width:100%; height:100%;
+            }
+            .container .content{
+                color: #fff;
+                text-align: center;
+                position: absolute;
+                left:50%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .content h3{
+                font-family:'Nexa Bold';
+                color:#e9592c;
+                font-size:65px;
+                text-align:center;
+            }
+            .content p{
+                margin-top:12px;
+                padding-left:5px;
+                padding-right:5px;
+                line-height:32px;
+                font-size:24px;
+                text-align:center;
+                color:#fff;
+            }
+            .icon{
+                text-align:center;
+                margin-top:10px;
+                height:118px;
+                margin:0 auto; 
+            }
+        </style>
+        <script>
+            $(document).ready(function(){
+                $("#fullpage").fullpage();
+            });
+
+            $(function(){
+                $(".bg-holder").parallaxScroll({
+                    friction:0.3
+                });
+            })
+            /* parallax-scroll 플러그인의 옵셔능 friction 하나 뿐이다. 옵션 값은 0에서 1 사잇값으로, 0으로 갈수록 배경 이미지가 콘텐츠를
+               따라 스크롤되고, 1로 갈수록 배경이 고정되고 콘테츠만 스크롤된다. 중간값을 적절히 지정해 패럴렉스 스크롤 효과를 내도록 한다.
+            */
+            
+            $(window).resize(function(){
+                $(".container").width($(window).width()).height($(window).height());
+                $(".content").each(function(){
+                $(this).css("margin-left",($(this).width()/2*(-1)) + "px").css("margin-top",($(this).height()/2*(-1)) + "px");
+                });
+            });
+            setTimeout(function(){$(window).resize()}, 1000);
+            $('.bg-holder').parallaxScroll({friction:0.3});
+            $(function(){
+                $(".icon img").hover(function(){
+                    $(this).attr("src", $(this).attr("src").replace(".png", "_over.png"));
+                }, function(){
+                    $(this).attr("src", $(this).attr("src").replace("_over.png", ".png"));
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="wrap">
+            <nav id="navi">
+                <h1><a href="http://www.beanoclock.com"><img src="images/logo.jpg"></a></h1>
+                <ul class="main-nav">			
+                    <li><a href="#ms1" class="scroll">Europe</a></li>
+                    <li><a href="#ms2" class="scroll">Korea</a></li>
+                    <li><a href="#ms3" class="scroll">China</a></li>
+                </ul>
+        </nav>
+            <div id="ms1" class="container bg-holder" data-width="1200" data-height="730">
+                <section class="content">
+                    <h3>Europe</h3>
+                    <p>Welcome to Europe
+                        <div class="icon"><img src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\icon_view.png"></div>
+                    </p>
+                </section>
+            </div>
+            <div id="ms2" class="container bg-holder" data-width="1200" data-height="730">
+                <section class="content">
+                    <h3>Korea</h3>
+                    <p>Welcome to Korea
+                        <div class="icon"><img src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\icon_view.png"></div>
+                    </p>
+                </section>
+            </div>
+            <div id="ms3" class="container bg-holder" data-width="1200" data-height="730">
+                <section class="content">
+                    <h3>China</h3>
+                    <p>Welcome to China
+                        <div class="icon"><img src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\icon_view.png"></div>
+                    </p>
+                </section>
+            </div>
+        </div>
+        <!-- Parallax-scroll 플러그인은 배경 이미지를 조금만 움직여 패럴렉스 스크롤링 효과를 만드는 플러그인이며, 배경이 적용되는 요소에
+             .bg-holder라는 클래스 이름을 추가해야 한다. 또한 data-width 속성과 data-height 속성을 이용해 원래 배경 이미지 크기를 알려
+             주는데, 이는 배경 이미지를 확대, 축소했을 때 가로, 세로 비율을 그대로 유지하기 위한 것이다.
+        -->
+    </body>
+</html>

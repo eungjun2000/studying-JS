@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> How to make Audio, video control and Web workers </title>
+    </head>
+
+    <body>
+        <audio id="audio" src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Sound.MP3"></audio>
+        <div id="aud_msg">Print audio control message here.</div>
+        <button id="play" onclick="audio_control(event)">play</button>
+        <button id="pause" onclick="audio_control(event)">pause</button>
+        <button id="replay" onclick="audio_control(event)">replay</button>
+        <button id="vol-" onclick="audio_control(event)">vol-</button>
+        <button id="vol+" onclick="audio_control(event)">vol+</button>
+        <button id="mute on/off" onclick="audio_control(event)">mute on/off</button>
+        <script>
+            var aud_div = document.getElementById("aud_msg");
+            var audio = document.getElementById("audio");
+            function audio_control(e){
+                var id = e.target.id;
+                if(id == "play"){audio.play(); aud_div.innerHTML = "Music is playing.";}
+                else if(id == "pause"){audio.pause(); aud_div.innerHTML = "Music is paused.";}
+                else if(id == "replay"){audio.load(); audio.play(); aud_div.innerHTML = "Music is replayed.";}
+                else if(id == "vol-"){
+                    audio.volume -= 0.1; 
+                    if(audio.volume < 0.1) audio.volume = 0;
+                    aud_div.innerHTML = "Volume 0.1 down. And now Audio Volume is " + audio.volume;}
+                else if(id == "vol+"){
+                    audio.volume += 0.1; 
+                    if(audio.volume > 0.9) audio.volume = 1.0;
+                    aud_div.innerHTML = "Volume 0.1 up. And now Audio Volume is " + audio.volume;}
+                else if(id == "mute on/off"){
+                    audio.muted = !audio.muted;
+                    if(audio.muted) div.innerHTML = "Music is Muted.";
+                    else aud_div.innerHTML = "Mute is cancelled."
+                }
+            }
+            /* 30. 브라우저는 웹 페이지에 내장된 오디오와 비디오를 제어할 수 있는 audio, video DOM 객체를 제공한다. 이들 DOM
+                   객체의 공통 프로퍼티와 메소드는 아래와 같다.
+            ------------------------------------------------------------------------------------------------------------
+                   ※ currentTime : 현재 재생 위치로서 초 단위의 실수이며, 재생 위치를 변경할 수 있다.
+                   ※ duration : 미디어의 전체 길이로 초 단위의 실수이다.
+                   ※ paused / ended : 재생이 중단되었으면 / 완료되었으면 true, 재생 중이면 / 아니면 false를 리턴한다.
+                   ※ volume : 현재 음량 값(0.0~1.0 사이 실수)을 나타낸다.
+                   ※ src, autoplay, loop, controls, muted : HTML 파트 오디어, 비디오 부분 참조
+                   ※ load() : 재생을 중단하고 src에 지정된 미디어를 다시 로드한다.
+                   ※ play() : 미디어를 현재 재생 위치에서 재생한다.
+                   ※ pause() : 미디어를 일시 중지한다.
+            */
+        </script><hr>
+        
+        <video id="video" width="0" height="0" controls autoplay>
+        <source src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Train.mp4" type="video/mp4">
+                    Web browser do not support video tag.
+        </video>
+        <script>
+            var video = document.getElementById("video");
+            video.onloadedmetadata = function f(e){
+                video.width = video.videoWidth;
+                video.height = video.videoHeight;
+            }
+            /* 31. video 태그로 생성된 video DOM 객체는 오디오와의 공통 메소드 외에 아래와 같은 몇 개의 메소드를 더 갖는다. 
+            -----------------------------------------------------------------------------------------------------------
+                   ※ width / height : video 객체가 브라우저에서 차지하는 픽셀 폭 / 높이
+                   ※ videoWidth / videoHeight : 비디오 미디어의 픽셀 폭 / 높이
+                   ※ poster : 비디오 파일이 없을 때 대신 출력할 이미지 파일의 주소 문자열
+            */
+        </script><hr>
+
+        <div id="loc_msg">Print location information here.</div>
+        <script>
+            if(!navigator.geolocation) alert("Location finding service is not supported.")
+            else navigator.geolocation.getCurrentPosition(found);
+            function found(position){
+                var now = new Date(position.timestamp);
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                var acc = position.coords.accuracy;
+                lat = lat.toPrecision(6);
+                lon = lon.toPrecision(6);
+
+                var text = "Current time : " + now.toUTCString() + "<br>" +
+                           "Current location(latitude : " + lat + ", " + "longitude : " + lon + ")<br>" +
+                           "Accuarcy : " + acc + "m<br><hr>";
+
+                document.getElementById("loc_msg").innerHTML = text;
+            }
+            /* 32. 브라우저는 geolocation 객체를 통해 위치 정보 서비스를 제공한다. 이 객체는 window.navigator 객체의 자식
+                   객체이다. geolocation 객체는 컴퓨터나 모바일 장치의 현재 위치를 알려주거나, 위치가 변경될 때마다 지속적
+                   으로 알려주는 반복 위치 서비스를 제공한다. 아래와 같은 메소드를 제공한다.
+            ----------------------------------------------------------------------------------------------------------
+                   ※ getCurrentPosition(positionCallback, errorCallback, options) : 현재 위치를 얻어낸다.
+                   ※ watchPosition(positionCallback, errorCallback, options) : 반복 위치 서비스를 시작한다.
+                      - positionCallback(Position) --> 현재 위치가 파악되었을 때 호출되는 콜백 함수명
+                                                       getCurrentPosition 함수로 위치가 파악되면 콜백 함수가 호출되고 Po
+                                                       sition 타입의 객체가 매개변수(Position)으로 넘어온다. Posistion의
+                                                       객체 프로퍼티는 coords(현재 위치를 나타내는 Coordinates 타입 객체)
+                                                       와 timestamp(위치가 파악된 시간 정보)가 있다. Coordinates 타입 객
+                                                       체로는 아래와 같은 종류가 있다.
+                                                       ---------------------------------------------------------------
+                                                       ※ latitude / longitude / altitude : 위도 / 경도 / 고도 실수 값
+                                                       ※ accuracy : 위도와 경도의 정확도를 표현하는 실수 값
+                                                       ※ heading : 장치가 움직이는 방향 정보의 실수 값
+                                                       ※ speed : 초당 미터 값으로 장치가 움직이는 속도
+
+                      - errorCallback --> 위치 파악 중 오류가 발생했을 때 호출되는 콜백 함수명. 생략 O
+                      - options --> 위치 파악 허용 최대 시간, 대기 시간, 위치에 대한 정확도 등의 정보를 담은 객체. 생략 O
+
+                   ※ clearWatch() : 반복 위치 서비스를 중단한다.
+            */
+        </script>
+        <div>Sum 1 between 10 : <span id="sum"></span></div>
+        <!-- 33. 웹 워커란 자바스크립트 코드를 백그라운드에서 실행시킬 수 있는 HTML5 표준 기능이다. 웹 페이지에 계산 시간이
+                 긴 코드가 실행되면 마우스나 키보드 입력이 늦게 처리되어 사용자 인터페이스가 원할하지 않게 되는 경우가 있을
+                 수 있다. 이 때 웹 워커 API를 이용한다면 실행 시간이 긴 작업을 별도의 백그라운드에서 실행시켜 사용자 인터페
+                 이스를 원할하게 할 수 있다. 단, 웹 워커 기능이 작동하는데는 몇 가지 원칙이 있다.
+                 -----------------------------------------------------------------------------------------------------
+                 ※ 백그라운드에서 실행되는 자바스크립트 코드는 자바스크립트 파일 형태로 만들어져야 한다.
+                 ※ 동일 출처 원칙에 의해 웹 페이지와 동일한 웹 사이트에 설치된 js 파일에 대해서만 웹 워커 기능이 작동한다.
+                 ※ 웹 워커 기능은 로컬 컴퓨터에 있는 웹 페이지에서는 작동하지 않는다.        
+        -->
+        <script>
+            var addWorker = new Worker("Worker_Task.js");
+            /* 34. 워커 객체인 addWorker는 워커 태스크와 메시지를 주고 받는다. 워커 태스크가 생성되면 브라우저의 메인 태스크
+                   와 동시에 실행되는 멀티태스킹 상황이 전개된다. 메시지를 보낸다면 message 이벤트가 발생한다. Worker 객체는
+                   아래와 같은 메소드와 이벤트 리스너를 갖는다.
+            -----------------------------------------------------------------------------------------------------------
+                   ※ Worker() : 워커 태스크를 생성한다.
+                   ※ postMesssage() : 워커 테스크에 메시지를 전송한다. 워커 태스크에는 message 이벤트가 발생한다.
+                   ※ terminate() : 즉각 워커 테스크의 실행을 종료시킨다.
+                   ※ onmessage : 워커 태스크로부터 발생한 message 이벤트를 받는 리스너이다. 
+                   ※ onerror : 오류가 발생할 때 받는 리스너이다.
+
+                   두 태스크는 변수나 메모리를 공유할 수 없다. 오로지 message 이벤트로만 정보를 교환할 수 있다.
+            */
+            addWorker.onmessage = function (e){
+                document.getElementById("sum").innerHTML = e.data;
+            }
+            /* 35. postMessage()를 통해 워커 객체에게 message 이벤트를 보내면, postMessage 메소드 안에 담긴 메시지 값을 Mes
+                   sageEvent 객체로 만들어 함께 보낸다. MessageEvent 객체는 data 프로퍼티 하나로 구성되며, 이 data 프로퍼티
+                   를 통해 메시지 값이 전달된다. 워커 객체는 워크 태스크가 보내는 message 이벤트를 받기 위해, onmessage 리스
+                   너를 작성해야 한다.
+            */
+        </script>
+    </body>
+</html>

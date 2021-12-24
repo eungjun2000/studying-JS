@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\jquery-backstretch-jquery-backstretch-2.1.17-2-gf6bf1d6\jquery-backstretch-jquery-backstretch-f6bf1d6\jquery.backstretch.js"></script>
+        <!-- 11. 풀 스크린 배경은 이미지나 동영상을 화면 전체에 가득 채워서 풀 스크린으로 보여주는 기법이다. CSS로는 단순하게 background-size
+                 속성을 이용하면 된다. 다만 CSS의 background-size 속성은 구형 브라우저 기준으로 호환성이 없으므로 풀 스크린 배경을 만들 때 사
+                 용하는 backstretch 플러그인을 사용하면 좋다.
+        -->
+        
+        <style>
+            h1{margin : 300px 0px 0px 600px;}
+        </style>
+        <script>
+            $(function(){
+                $.backstretch(["C:/Users/eungj/Downloads/Img_for_web/Europe.jpg",
+                               "C:/Users/eungj/Downloads/Img_for_web/Korea.jpg",
+                               "C:/Users/eungj/Downloads/Img_for_web/China.jpg",
+                               "C:/Users/eungj/Downloads/Img_for_web/Japan.jpg"
+                ],
+                {duration:3500, fade:750});
+            });
+            /* 12. $.backstretch() 메소드를 이용해 backstretch 플러그인을 사용할 수 있다. 또한 여러 개의 배경 이미지 파일과 전환 시간을 지정
+                   하면 풀 스크린 배경 이미지를 슬라이드 쇼로 보여주는 기능도 있다. 문법은 다음과 같으며, 대괄호 안에 지정한 이미지들을 durati
+                   on 속성으로 화면에 표시되는 시간을 지정하고, fade 속성으로 페이드 효과 시간을 지정한다.
+                   -----------------------------------------------------------------------------------------------------------------
+                   $.backstretch(["이미지 파일1, ... 이미지 파일n"], {duration:시간, fade:시간});
+            */
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <h1>Welcome to our Country!</h1>
+        </div>
+    </body>
+</html>

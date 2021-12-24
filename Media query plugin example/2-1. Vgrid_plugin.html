@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-wdidth; init-scale=1;">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\jQuery-vGrid-Plugin-master\jquery.vgrid.js"></script>
+        <style>
+			* {
+				margin:0;
+				padding:0;
+            }
+			#container div{
+				width:200px;
+				background:#fff;
+				box-shadow: 0px 1px 1px #aaa;
+				padding:15px;
+				padding-bottom:15px;
+				margin:15px;				
+			}		
+			#container div img{
+				width:100%;
+				padding-bottom:15px;
+				margin-bottom:5px;
+			}
+			#container div h2{
+				font-size:1em;
+				color:#0d2dff;
+			}
+			#container div p{
+				font-family:"맑은 고딕", 돋움;
+				font-size:0.8em;
+				color:#222;
+				margin:0;
+				padding:10px;
+			}
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Baked_chicken.jpg">
+                <h2>Baked_chicken</h2>
+                <p>This is Baked_chicken.</p>
+            </div>
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Bean.jpg">
+                <h2>Bean</h2>
+                <p>This is Bean.</p>
+            </div>
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Cake.jpg">
+                <h2>Cake</h2>
+                <p>This is Cake.</p>
+            </div>
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Donut.jpg">
+                <h2>Donut</h2>
+                <p>This is Donut</p>
+            </div>
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Fish.jpg">
+                <h2>Fish</h2>
+                <p>This is Fish</p>
+            </div>
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Pizza.jpg">
+                <h2>Pizza</h2>
+                <p>This is Pizza</p>
+            </div>
+            <div><img src="C:\Users\eungj\Downloads\Img_for_web\Squid.jpg">
+                <h2>Squid</h2>
+                <p>This is Squid.</p>
+            </div>
+        </div>
+        <script>
+            $("#container").vgrid({
+                time:400,
+                delay:30,
+                wait:500
+            });
+        </script>
+    </body>
+    <!-- vgrid 플러그인을 사용하면 브라우저 화면 크기에 따라 화면 요소의 위치를 동적으로 옮겨 주는 그리드 레이아웃 플러그인 중 하나이다.
+         키드형 디자인 사이트를 만드는데 유용하다. time은 애니메이션 실행 시간, delay는 지연 시간, wait는 대기 시간이다. </body> 태그
+         앞에 함수 코드를 추가해야 한다.
+    -->
+</html>

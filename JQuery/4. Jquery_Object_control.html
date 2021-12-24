@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Jquery - Object control </title>
+        <!-- 44. 제이쿼리는 객체를 생성, 복제, 삭제, 속성 변환할 수 있다. 이는 객체 조작 메소드로 할 수 있는데, 객체 조작 메소
+                 드는 속성 조작 메소드와 수치 조작 메소드, 객체 편집 메소드로 나뉜다. 속성 조작 메소드는 요소의 속성을 바꿀 때
+                 사용되며, 수치 조작 메소드는 요소의 너빗값 또는 높잇값 같은 수치를 바꿀 때, 객체 편집 메소드는 말 그대로 객체
+                 를 생성하거나 삭제 또는 복제할 때 사용한다.
+        -->
+
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <style>
+            .red{background-color:red;}
+            .green{background-color:green;}
+            .blue{background-color:blue;}
+
+            #loc_p1, #loc_p2{
+                width : 100px; height : 50px; font-size : 13px;
+                padding : 20px; border : 5px solid #000;
+                background-color : #ff0;
+            }
+
+            #box_wrap{
+                width : 300px; height : 200px;
+                margin : 50px auto 0; position : relative; 
+                background-color : #ccc;
+            }
+            .box{
+                width : 50px; height : 50px;
+                position : absolute; left : 100px; top : 50px;
+                background-color : #f00;
+            }
+
+            h4{background-color : aqua;}
+        </style>
+        <!-- ############################################# 속성 조작 메소드 ############################################ -->
+        <script>
+            $(function(){
+                console.log($("#sec_1").html());
+                $("#sec_1 p").html("<a href=https://naver.com>Naver</a>");
+                /* 45. html() 메소드 --> 문법은 2가지 형태로, 아래와 같다.
+                ------------------------------------------------------------------------------------------------------
+                       ※ $("요소 선택").html() : 선택한 요소의 하위 요소를 가져온다.
+                       ※ $("요소 선택").html("새 요소") : 선택한 요소의 하위 요소를 제거하고 그 위치에 새 요소를 생성한다.
+                */
+
+                console.log($("#sec_2").text());   
+                $("#sec_2 h3").text("New_text");
+                /* 46. text() 메소드 --> 문법은 2가지 형태로, 아래와 같다.
+                ----------------------------------------------------------------------------------------------------------
+                       ※ $("요소 선택").text() : 선택한 요소가 감싸는 모든 텍스트를 가져온다.
+                       ※ $("요소 선택").text("새 텍스트") : 선택한 요소의 하위 요소를 제거하고 그 위치에 새 텍스트를 생성한다.
+                */
+
+                var attr_get = $("#sec_3 img").attr("src");
+                console.log(attr_get);
+                $("#sec_3 img").attr({
+                    "width":100,
+                    "src": attr_get.replace("Club_card.png", "Diamond_card.png"),
+                    "alt":"diamond"
+                }).removeAttr("border");
+                /* 47. attr()/removeAttr() 메소드는 선택한 요소에 새 속성을 생성, 기존 속성을 변경, 요소 속성값을 불러온다.
+                -------------------------------------------------------------------------------------------------------
+                       ※ attr() : $("요소 선택").attr("속성명") or $("요소 선택").attr("속성명1", "새 값1", ...)
+                                   --> 선택한 요소의 지정한 속성을 가져온다.
+                                
+                       ※ removeAttr() : $("요소 선택").removeAttr("속성") --> 선택한 요소에서 지정한 속성을 삭제한다.
+                */
+
+                $("#p1").addClass("red");
+                $("#p2").removeClass("red");
+                $("#p3").toggleClass("green");
+                $("#p4").toggleClass("green");
+                $("#p6").text($("#p5").hasClass("blue"));
+                /* 48. addClass() : 요소를 선택해 지정한 class 값을 생성한다.
+                       removeClass() : 요소를 선택해 지정한 class 값을 삭제한다.
+                       toggleClass() : 요소를 선택해 지정한 class 값이 있으면 삭제하고, 없으면 생성한다.
+                       hasClass() : 선택한 요소에 지정한 class 값이 있으면 true, 없으면 false를 반환한다.
+                */
+                
+                console.log($("#user_name").val());
+                $("#user_id").val("new_ID");
+                console.log($("#user_id").val());
+                /* 49. val() 메소드는 선택한 폼 요소의 value 속성값을 가져오거나 새 값을 적용한다.
+                ------------------------------------------------------------------------------------------------------
+                       ※ $("요소 선택").val() : 선택한 폼 요소의 value 값을 가져온다.
+                       ※ $("요소 선택").val("새 값") : 요소를 선택해 value 속성에 새 값을 적용한다.
+                */
+                
+                console.log("Is checkbox_1 checked? : " + $("#chk_1").prop("checked"));
+                console.log("Is checkbox_2 checked? : " + $("#chk_2").prop("checked"));
+                $("#chk_3").prop("checked", true);
+                console.log($("#sel_1").prop("selectedIndex"));
+                /* 50. prop() 메소드는 선택한 라디오 버튼, 체크 박스, 선택 상자의 상태 속성 값을 가져오거나 새롭게 설정한다.
+                ----------------------------------------------------------------------------------------------------------
+                       ※ $("요소 선택").prop("[checked|selected]") 
+                          : 선택한 폼 요소(라디오 버튼, 체크 박스, 선택 상자)가 체크된 상태인지, 선택된 상태인지 알 수 있다. 체
+                            크되거나 선택된 상태일 경우 true, 아닐 경우 false를 반환한다.
+
+                       ※ $("요소 선택").prop("[checked|selected]", [true|false])
+                          : 폼 요소(라디오 버튼, 체크 박스, 선택 상자)를 선택해 체크 또는 선택 상태를 바꿀 수 있다.
+                       
+                       ※ $("요소 선택").prop("[tagName|nodeType|selectedIndex|defaultValue]")
+                          : 선택한 요소의 태그명이나 노드 타입, 선택된 옵션의 인덱스 값을 가져온다. defaultValue는 사용자가 val
+                            ue 속성값을 바꿔도 초기의 value 속성값을 가져오게 한다.
+                */
+            });
+        </script>
+        <!-- ########################################################################################################## -->
+
+        <!-- ############################################# 위치 조작 메소드 ############################################ -->
+        <script>
+            $(function(){
+                console.log("content width : " + $("#loc_p1").width());
+                console.log("content innerWidth : " + $("#loc_p1").innerWidth());
+                console.log("content outerWidth : " + $("#loc_p1").outerWidth());
+                console.log("box top(position) : " + $(".box").position().top);
+                console.log("box top(offset) : " + $(".box").offset().top);
+                console.log("scroll bar : " + $(window).scrollTop());
+                /* 51. 수치 조작 메소드의 종류는 아래와 같다.
+                -------------------------------------------------------------------------------------------------------
+                       ※ width()/height() : 안쪽 여백과 선을 제외(content 크기)한 너빗값/높잇값을 반환/변환환다.
+                       ※ innerWidth()/innerHeight() : 안쪽 여백을 포함(padding 크기)한 너빗값/높잇값을 반환/변환환다.
+                       ※ outerWidth()/outerHeight() : 선과 안쪽 여백을 포함(border 크기)한 너빗값/높잇값을 반환/변환환다.
+                       ※ position() : 포지션 기준이 되는 요소를 기준으로 선택한 요소의 위치 좌푯값을 구한다.
+                                       --> $("요소 선택").position().[left|right|top|bottom]
+
+                       ※ offset() : 문서를 기준으로 선택한 요소의 위치 좌푯값(수평/수직 이격 간격)을 구한다.
+                                     --> $("요소 선택").offset().[left|top]
+                       
+                       ※ scrollTop()/scrollLeft() : 스크롤바가 수직/수평으로 이동한 위치값을 반환한다.
+                */
+            });
+        </script>
+        <!-- ########################################################################################################## -->
+
+        <!-- ############################################# 객체 편집 메소드 ############################################ -->
+        <script>
+            $(function(){
+                $("#obj_wrap p:eq(2)").after("<p>- Inserted by after method</p>");
+                $("<p>- Inserted by insertAfter method</p>").insertAfter("#obj_wrap p:eq(1)");
+                $("#obj_wrap P:eq(1)").before("<p>- Inserted by before method</p>");
+                $("<p>- Inserted by insertBefore method</p>").insertBefore("#obj_wrap p:eq(0)");
+                /* 52. ※ after() : $("요소 선택").after("새 요소") --> 선택한 요소의 다음 위치에 새 요소를 추가한다.
+                       ※ insertAfter() : $("새 요소").insertAfter("요소 선택") --> 선택한 요소의 다음에 새 요소를 추가한다.
+                       ※ before() : $("요소 선택").before("새 요소") --> 선택한 요소의 이전 위치에 새 요소를 추가한다.
+                       ※ insertBefore() : $("새 요소").insertBefore("요소 선택") --> 선택한 요소의 이전에 새 요소를 추가한다.
+                */
+
+                $("#obj_wrap").append("<p>+ Inserted by append method</p>");
+                $("<p>+ Inserted by appendTo method</p>").appendTo("#obj_wrap");
+                $("#obj_wrap").prepend("<p>+ Inserted by prepend method</p>");
+                $("<p>+ Inserted by prependTo method</p>").prependTo("#obj_wrap");
+                /* 53. ※ append() : $("요소 선택").append("새 요소") --> 선택한 요소의 마지막 위치에 새 요소를 추가한다.
+                       ※ appendTo() : $("새 요소").appendTo("요소 선택") --> 선택한 요소의 마지막에 새 요소를 추가한다.
+                       ※ prepend() : $("요소 선택").prepend("새 요소") --> 선택한 요소의 맨 앞 위치에 새 요소를 추가한다.
+                       ※ prependTo() : $("새 요소").prependTo("요소 선택") --> 선택한 요소의 맨 앞에 새 요소를 추가한다.
+                */
+
+                $("#obj_wrap_3").remove();
+                $("#obj_wrap_4").empty();
+                $("#obj_wrap_4").append($("#obj_wrap_2 p").clone());
+                /* 54. ※ remove() : 선택한 요소를 삭제한다.
+                       ※ empty() : 선택한 요소의 모든 하위 요소를 삭제한다.
+                       ※ clone() : $("요소 선택").clone([true|false]) --> 선택한 요소를 복제한다.
+                */
+
+                $("#rep_p1").replaceWith("<p>@ Replaced by replaceWith method<p>");
+                $("<p>@ Replaced by replaceAll method<p>").replaceAll("#rep_p2");
+                /* 55. ※ replaceWith() : $("요소 선택").replaceWith("새 요소") --> 선택한 요소를 새 요소로 교체한다.
+                       ※ replaceAll() : $("새 요소").replaceAll("요소 선택") --> 선택한 요소를 새 요소로 교체한다.
+                */
+
+                $("strong").unwrap();
+                $(".ct1").wrap("<h4 />");
+                $(".ct2").wrapAll("<h4 />");
+                $("ul").wrapInner("<h4 />");
+                /* 56. ※ unwrap() : 선택한 요소의 부모 요소를 삭제한다.
+                       ※ wrap() : 선택한 요소를 새 요소로 각각 감싼다.
+                       ※ wrapAll() : 선택한 요소를 새 요소로 한꺼번에 감싼다.
+                       ※ wrapInner() : 선택한 요소의 모든 하위 요소를 새 요소를 감싼다.
+                */
+            });
+        </script>
+        <!-- ########################################################################################################## -->
+    </head>
+    
+    <body>
+        <h2>-------------------------------- Object control method - Attribute control -------------------------------</h2>
+        <section id="sec_1">
+            <h3><em>html()</em></h3>
+            <p>Html() method example</p>
+        </section>
+        <section id="sec_2">
+            <h3><em>text()</em></h3>
+            <p>Text() method example</p>
+        </section>
+        <section id="sec_3">
+            <p><img src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Club_card.png" alt="club" border="2"></p>
+        </section>
+
+        <p id="p1">Class() method example_1</p>
+        <p id="p2" class="red">Class() method example_2</p>
+        <p id="p3">Class() method example_3</p>
+        <p id="p4" class="green">Class() method example_4</p>
+        <p id="p5" class="blue">Class() method example_5</p>
+        <p id="p6"></p>
+
+        Name : <input type="text" value="Alice" id="user_name">
+        ID : <input type="text" value="abc1234" id="user_id"><br>
+
+        <p>
+            <input type="checkbox" id="chk_1">chk_1
+            <input type="checkbox" id="chk_2" checked>chk_2
+            <input type="checkbox" id="chk_3">chk_3
+        </p>
+        <p>
+            <select id="sel_1">
+                <option value="opt_1">option_1</option>
+                <option value="opt_2">option_2</option>
+                <option value="opt_3 selected">option_3</option>
+            </select>
+        </p><hr>
+
+        <h2>-------------------------------- Object control method - Location control -------------------------------</h2>
+        <p id="loc_p1">Location control_ex_1</p>
+        <p id="loc_p2">Location control_ex_2</p>
+        <div id="box_wrap">
+            <p class="box">Box</p>
+        </div><hr>
+
+        <h2>--------------------------------- Object control method - Object control ---------------------------------</h2>
+        <div id="obj_wrap">
+            <p style="color:red">content_1</p>
+            <p style="color:red">content_2</p>
+            <p style="color:red">content_3</p>
+        </div>
+        <div id="obj_wrap_2"><p style="color:blue">content_4</p></div>
+        <div id="obj_wrap_3"><p>content_5</p></div>
+        <div id="obj_wrap_4">
+            <p>content_6</p>
+            <p>content_7</p>
+        </div>
+        <p id="rep_p1">content_8</p>
+        <p id="rep_p2">content_9</p>
+
+        <strong>Remove strong tag</strong>
+        <p class="ct1">Wrap() method example_1</p>
+        <p class="ct1">Wrap() method example_2</p>
+        <p class="ct2">Wrap() method example_3</p>
+        <p class="ct2">Wrap() method example_4</p>
+        <ul>
+            <li>Wrap() method example_5</li>
+            <li>Wrap() method example_6</li>
+        </ul>
+    </body>
+</html>

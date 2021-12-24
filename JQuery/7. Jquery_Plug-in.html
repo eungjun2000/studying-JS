@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Jquery - Plug-in </title>
+        <!-- 77. 플러그인이란 여러 개발자가 드래그 & 드롭, 슬라이드 배너, 툴 팁 기능 등을 구현해 놓은 프로그램을 자바스크립트
+                 파일로 제공하는 라이브러리이다. 제이쿼리에서는 이러한 플러그인들을 내려받아 웹 문서에 연동해 선택한 기능(Met
+                 hod)만 적용해 복잡하고 어려운 기능을 쉽게 구현할 수 있다. 플러그인을 상업적으로 이용하려면, 플러그인 문서 상
+                 단에 있는 저작권 내용을 반드시 코드에 포함시켜야 한다. 다만 무료로 배포되는 플러그인들도 있다. 보통 플러그인
+                 오픈 소스를 제공하는 "HTML DRIVE"나 "Best JQuery" 사이트에서 내려받을 수 있다.
+        -->
+        
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <link rel="stylesheet" href="C:\Web_Plugin\jquery-ui-1.12.1.custom\jquery-ui.js"/>
+        <script src="C:\Web_Plugin\jquery-ui-1.12.1.custom\jquery-ui.min.js"></script>
+        <!-- 78. 제이쿼리 라이브러리(jquery.js)처럼 플러그인도 웹 문서에 연동해야 한다. -->
+
+        <style>
+            #layer_popup{position : absolute; left : 50px; top : 50px; cursor : move;}
+        </style>
+        <script>
+            $(function(){
+                $("#layer_popup").draggable(); // 드래그 레이어 팝업
+                $("#startDate").datepicker(); // 달력 출력
+                /* 79. 위는 JQuery 플러그인 중 하나인 UI 플러그인을 예로 들었다. UI 플러그인은 아래의 많은 옵션, 메소드들이 있다.
+                ------------------------------------------------------------------------------------------------------------
+                       ※ Interactions : Droppable, Resizable, Selectable, Sortable, 
+                       ※ Widgets : Accordion, Autocomplete, Button, Checkboxradio, Controlgroup, Datepicker, Dialog, Menu,
+                                    Progressbar, Selectmenu, Slider, Spinner, Tabs, Tooltip
+                       ※ Effects : Add Class, Color Animation, Easing, Effect, Hide, Remove Class, Show, Switch Class,
+                                    Toggle, Toggle Class
+                       ※ Utilities : Position, Widget Factory
+                       
+                       Q. 그 밖의 플러그인들인 무엇이 있는가?
+                       -----------------------------------------------------------------------------------------------------
+                          bxSlider, TweenMax, lazyload, SVG Convert, spin, ... 등등 정말 많다. 필요하면 그때 그때 개발자가 용도
+                          에 맞는 플러그인을 찾아서 쓰면 된다.
+                */
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="layer_popup"></div>
+            <img src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Java.PNG" alt="">
+        </div>
+        <p>
+            <label for="startDate">Select Date</label>
+            <input type="text" name="startDate" id="startDate">
+        </p>
+    </body>
+</html>

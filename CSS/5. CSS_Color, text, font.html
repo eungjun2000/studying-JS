@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CSS - Color, text, font </title>
+
+        <style>
+            div{
+                color : blueviolet;
+                /* 15. CCS에서 색을 표현하는 방법으로는 색 이름 표현 방식이 있다. */
+                
+                background-color : rgb(241, 228, 148);
+                /* 16. CSS에서 색을 표현하는 방법으로는 RGB 방식이 있다. 그 외 RGBA, HSL 등이 있다. */
+
+                border-color : #6B8E23;
+                /* 17. CSS에서 색을 표현하는 방법으로는 16진수 코드 표현 방식이 있다. */
+            }
+
+            .h3_1{text-align : right;}
+            /* 18. text-align 프로퍼티는 텍스트의 정렬 모양을 세밀하게 제어한다. 그에 대한 Value는 아래와 같다.
+            ---------------------------------------------------------------------------------------------
+                   text-align : left | right | center | justify(양쪽 정렬)
+            */
+
+            span{text-decoration : line-through;}
+            /* 19. text-decoration 프로퍼티는 텍스트를 세밀하게 꾸민다. 그에 대한 Value는 아래와 같다.
+            --------------------------------------------------------------------------------------
+                   text-decoration : none | underline(밑줄) | overline(윗줄) | line-through(취소선)
+            */
+
+            p{text-indent : 3em;}
+            /* 20. text-indent 프로퍼티는 텍스트 들여쓰기를 세밀하게 제어한다. 그에 대한 Value는 아래와 같다. 
+            -------------------------------------------------------------------------------------------
+                   text-indent : <length> | <percentage>
+                   ------------------------------------------------------------------------------------
+                   ※ value 값은 em(권장), %, px, cm, mm, in, pt, pc, deg 등이 있다.
+            */
+
+            body{
+                font-family : Arial, "Times New Roman", serif;
+                /* 21. font-family 프로퍼티에는 구체적인 폰트 종류와 폰트의 유형을 출력한다. 문법은 아래와 같다. 
+                ---------------------------------------------------------------------------------------------
+                       font-family : 폰트 종류1, 폰트 종류1이 없을 경우 폰트 종류2, ..., 폰트 유형
+                    -----------------------------------------------------------------------------------------
+                       ※ 폰트 종류 : 폰트1이 없을 경우, 폰트2를 출력한다. 폰트 종류에 공백이 있을 경우 ""로 묶는다.
+                       ※ 폰트 유형 : 삐침(serif) 여부와 글자 폭 특징에 따라 3 종류로 분류된다.
+                                     ------------------------------------------------------------------------
+                                     1. serif : 글자의 끝에 삐침 선을 가진 폰트를 생성
+                                     2. sans-serif : 삐침 선이 없는 폰트를 생성
+                                     3. monospace : 삐침 여부와 상관없이 모든 글자 폭이 동일한 폰트를 생성
+                */
+
+                font-size : large;
+                /* 22. font-size 프로퍼티에는 글자 크기를 지정한다. 직접 em, px 등으로 절대 수치를 지정할 수도 있다. */
+
+                font-weight : 600;
+                /* 23. font-weight 프로퍼티에는 글자의 굵기를 지정한다. 100 ~ 900 사이의 값 또는 normal, bold 등으로 지정한다. */
+
+                font-style : italic;
+                /* 24. font-style  프로퍼티에는 글자의 스타일을 지정한다. normal, italic, oblique 3 종류가 있다. */
+            }
+        
+            .h3_2{font : italic bold 2em consolas, sans-serif;}
+            /* 25. font 프로퍼티는 font-style, font-weight, font-size, font-family 순서대로 지정하는 단축 프로터티이다. 
+            -------------------------------------------------------------------------------------------------------
+                   ※ font-size와 font-family는 반드시 지정되어야 한다.
+            */
+        </style>
+    </head>
+
+    <body>
+        <div>
+            CSS style color
+        </div><hr>
+        <h3 class="h3_1">Decorate text</h3>
+        <p>You cannot <span>control detail text</span> like align, blank by using only HTML tags.</p><hr>
+        <h3 class="h3_2">Use only font property</h3>
+    </body>
+</html>

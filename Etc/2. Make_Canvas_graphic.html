@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> How to make Canvas graphic </title>
+        <!-- 14. 웹 개발자들은 웹 페이지에 사진이나 그림 혹은 그래픽을 출력하기 위해 아래와 같은 2가지 방법을 사용했다.
+        ------------------------------------------------------------------------------------------------------------
+                 ※ 사진이나 그림은 <img> 태그를 이용한다.
+                 ※ 그래픽은 자바 애플릿이나 플래시 등의 플러그인을 이용한다.
+                 ---------------------------------------------------------------------------------------------------
+                    허나 플러그인을 사용하면 플러그인 소프트웨어 설치의 번거로움, 웹 페이지 로딩 지연, 특정 브라우저에서만
+                    실행되는 비호환성이 문제가 된다. 더군다나 모바일 단말기에는 플러그인을 설치조차 할 수 없어 그래픽을 포
+                    함하는 범용 웹 페이지 개발에도 어려움이 있다. 이런 문제를 해결하기 위해 HTML은 캔버스 기능을 도입했다.
+
+                 Q. 캔버스란 무엇인가?
+                 ---------------------------------------------------------------------------------------------------
+                    HTML에서 지원하는 플러그인 도움 없이 자바스크립트 코드로 웹 페이지에 자유롭게 그래픽을 수행할 수 있는
+                    기능이다. 캔버스의 장점은 모바일 단말기, HTML5를 지원하는 모든 브라우저에서 작동한다는 점이다. 캔버스
+                    의 그래픽 기능을 이용하면 도형, 2차원 문자나 이미지 합성 & 변환도 쉽게 만들어 낼 수 있다. 또한 실시간
+                    그래프, 게임, 지도 등도 만들 수 있어 응용 프로그램 수준으로 진화하는 계기가 되었다.
+        -->
+    </head>
+
+    <body onload="init()">
+        <canvas id="Mycanvas" width="500" height="370" style="background-color:lightblue;"></canvas>
+        <!-- 15. 웹 페이지에 캔버스 영역을 만드는 방법은 아래와 같다. width와 height 만큼의 캐버스 공간이 할당된다.
+        -------------------------------------------------------------------------------------------------------
+                 <canvas id = "캔버스 객체 id" style = "CSS3 스타일 시트" 
+                         width = "캔버스 영역 폭" height = "캔버스 영역 높이">
+                         이 태그를 지원하지 않는 브라우저가 출력할 HTML 텍스트
+                 </canvas>
+        -->
+        <script>
+            var canvas_drawing = document.getElementById("Mycanvas");
+            var context = canvas_drawing.getContext("2d");
+            /* 16. getContext() 메소드는 캔버스의 켄텍스트(그리기 도구)를 얻어낸다. 캔버스 객체를 getElementById()로 얻어
+                   냈다면 캔버스 객체로부터 컨텍스트를 얻어내는데 이 때 얻어낸 컨텍스트의 객체를 이용해 그림을 그린다. 컨텍
+                   스트 객체의 프로퍼티는 아래와 같다.
+            ----------------------------------------------------------------------------------------------------------
+                   ※ strokeStyle / fillStyle : 선 색 / 채우기 색
+                   ※ lineWidth : 도형의 선 두께, 픽셀 단위
+                   ※ font / textAlign : 텍스트 폰트 / 텍스트 정렬 방식(디폴트 값 : left)
+            */
+
+            context.beginPath();
+            context.rect(30, 30, 50, 50);
+            context.strokeStyle="blue";
+            context.fillStyle="red";
+            context.stroke();
+            context.fill();
+            /* 17. 캔버스를 이용해 그림을 그릴 수 있다. 캔버스 그리기에는 2가지 유형이 있는데, 그 중 한 유형은 beinPath()를
+                   호출해서 빈 경로를 만들고 경로에 먼저 선, 원, 사각형 등의 도형을 모아놓고 한 번에 그리는 방법이다. 경로에
+                   관련된 컨텍스트 객체의 메소드는 아래와 같다.
+            -----------------------------------------------------------------------------------------------------------
+                   ※ beginPath() : 이전 경로를 모두 지우고 새로 시작한다.
+                   ※ closePath() : 경로의 끝 점과 시작점을 연결하는 선을 추가하고 경로를 닫는다.
+                   ※ moveTo() / lineTo() : 경로에 새 점을 만든다. / 경로에 끝 점과 연결하는 새로운 선을 추가한다.
+                   ※ rect() / arc() : 경로에 사각형을 추가한다. / 경로에 원호를 추가한다.
+                   ※ fill() : 경로에 만들어진 모든 도형을 외곽선 없이 내부만 색으로 채워 캔버스를 그린다.   
+                   ※ stroke() : 경로에 담겨 있는 모든 도형을 외곽선만 캔버스에 그린다.
+            */
+
+            context.fillStyle = "green";
+            context.fillRect(100, 30, 50, 50);
+            /* 18. 캔버스를 이용해 그림을 그리는 두 번째 유형은 경로에 담지 않고 바로 캔버스에 그리는 방법이다. 경로와 관련없
+                   이 캔버스에 바로 그리는 컨텍스트 객체의 메스드는 아래와 같다.
+            ------------------------------------------------------------------------------------------------------------
+                   ※ clearRect() : 캔버스에서 사각형 영역을 지운다.
+                   ※ strokeRect() / fillRect() : 외곽선만 있는 / 외곽선 없이 색으로 채워진 사각형을 캔버스에 바로 그린다.
+                   ※ strokeText() / fillText() : 외곽선만 있는 / 외곽선 없이 색으로 채워진 문자열을 캔버스에 바로 그린다.
+                   ※ drawImage() : 이미지를 캔버스에 바로 그린다.
+            */
+
+            context.moveTo(30, 100);
+            context.lineTo(100, 150);
+            context.lineTo(150, 130);
+            context.lineTo(30, 100);
+            context.strokeStyle="magenta"
+            context.stroke();
+            /* 19. moveTo(x, y)와 lineTo(x, y) 메소드로 자유 도형(삼각형)을 그릴 수 있다. */
+
+            context.beginPath();
+            context.arc(50, 200, 30, 0, 2*Math.PI, false);
+            context.strokeStyle="brown";
+            context.stroke();
+            /* 20. arc(x, y, radius, startAngle, endAngle, anticlockwise) 메소드로 원호를 그릴 수 있다.
+            ---------------------------------------------------------------------------------------------
+                   ※ x, y, radius : (x, y)는 원호의 중심 좌표, radius는 반지름 값이다.
+                   ※ startAngle, endAngle : 원호의 시작/끝 각도이다. 3시 기점 시계 방향으로 각도를 계산한다.
+                   ※ anticlockwise : true면 반시계, false면 시계방향(default 값)으로 원호를 그린다.
+            */
+
+            context.font="italic 50px forte";
+            context.strokeStyle="darkblue"
+            context.textAlign="left";
+            context.strokeText("Draw canvas Text", 20, 290);
+
+            context.fillStyle="indigo";
+            context.textAlign="right";
+            context.fillText("Draw canvas Text", 420, 340);
+            /* 21. strokeText, fillText(text, x, y, [, maxWidth])를 이용해 문자열을 그릴 수 있다. 
+            ------------------------------------------------------------------------------------------------
+                   ※ maxWidth : 텍스트가 출력되는 최대 폭이다. text가 이 값보다 크면 다른 폰트로 자동 대체된다.
+            */
+            
+        </script>
+            <canvas id="Draw_canvas" width="500" height="370" style="background-color:lightgreen;"></canvas>
+        <script>
+            var canvas_image = document.getElementById("Draw_canvas");
+            var context_2 = canvas_image.getContext("2d");
+            var img = new Image();
+            img.onload = function(){
+                   context_2.drawImage(img, 0, 0, canvas_image.width, canvas_image.height);
+            }
+            img.src="C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Java.PNG";
+            /* 22. drawImage(img, dx, dy)를 이용해 캔버스에 이미지를 그릴 수 있다. 기본형 말고도 몇 가지 유형이 존재한다.
+            ---------------------------------------------------------------------------------------------------------
+                   ※ drawImage(img, dx, dy, dWidth, dHeight)
+                   ※ drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+            */
+        </script>
+
+            <canvas id="Mouse_canvas" width="500" height="370" style="background-color:lightpink;"></canvas>
+        <script>
+            var canvas_mouse, context_3;
+            function init(){
+                canvas_mouse = document.getElementById("Mouse_canvas");
+                context_3 = canvas_mouse.getContext("2d");
+                context_3.lineWidth = 2;
+                context_3.strokeStyle = "blue";
+                canvas_mouse.addEventListener("mousemove", function(e){move(e)}, false);
+                canvas_mouse.addEventListener("mousedown", function(e){down(e)}, false);
+                canvas_mouse.addEventListener("mouseup", function(e){up(e)}, false);
+                canvas_mouse.addEventListener("mouseout", function(e){out(e)}, false);
+            }
+            var startX = 0, startY = 0; var dragging = false;
+            function draw(curX, curY){
+                context_3.beginPath();
+                context_3.moveTo(startX, startY);
+                context_3.lineTo(curX, curY);
+                context_3.stroke();
+            }
+            function down(e){
+                startX = e.offsetX; startY = e.offsetY; dragging = true;
+            }
+            function up(e){dragging = false;}
+            function move(e){
+                if(!dragging) return;
+                var curX = e.offsetX, curY = e.offsetY;
+                draw(curX, curY);
+                startX = curX; startY = curY;
+            }
+            function out(e){dragging = false;}
+            /* 23. canvas 객체 역시 DOM 객체이므로 이벤트를 처리할 수 있다. 위는 그림판을 자바스크립트로 구현한 것이다. */
+
+            //context.clearRect(0, 0, canvas_drawing.width, canvas_drawing.height);
+            /* 24. clearRect()는 캔버스에 있는 내용을 전부 지운다. */
+        </script>
+    </body>
+</html>

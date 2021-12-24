@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\jquery.scrollTo-master\jquery.scrollTo.js"></script>
+        <style>
+            html{
+                scroll-behavior : smooth;
+            }
+            nav{
+                display : inline-flex;
+                flex-direction : row;
+                justify-content : space-between;
+                width : 100%;
+                padding : 0; margin : 0;
+                background : orange;
+            }
+            .nav_btn{
+                height : 30px; width : 20%;
+                line-height : 30px;
+            }
+            nav a:link, nav a:visited{
+                font-size : 1em;
+                color : #fff;
+                text-decoration : none;
+                text-align : center;
+            }
+            section{
+                position : relative;
+                width : 100%; height : 800px;
+                margin : 0 auto; padding : 20px; border : 1px solid black;
+            }
+            section h2{
+                font-size : 4em;
+                color : white;
+                text-shadow : 1px 2px 1px blck;
+                line-height : 600px;
+                text-align : center;
+                text-transform : uppercase;
+            }
+            .page1{
+                background : url('C:/Users/eungj/Downloads/Img_for_web/Europe.jpg') no-repeat center;
+                background-size : cover;
+            }
+            .page2{
+                background : url('C:/Users/eungj/Downloads/Img_for_web/Korea.jpg') no-repeat center;
+                background-size : cover;
+            }
+            .page3{
+                background : url('C:/Users/eungj/Downloads/Img_for_web/China.jpg') no-repeat center;
+                background-size : cover;
+            }
+            .page4{
+                background : url('C:/Users/eungj/Downloads/Img_for_web/Japan.jpg') no-repeat center;
+                background-size : cover;
+            }
+        </style>
+        <!-- 10. 원 페이지 사이트란 웹 사이트를 한 페이지로 만드는 것이다. 한 페이지 안에 모든 내용이 다 들어있기 때문에 따로 메뉴를 선택하지
+                 않아도 화면을 위아래나 좌우로 스크롤하면서 보고 싶은 내용을 찾아볼 수 있어 편리하다. CSS로 많은 효과를 구현하는 것은 쉽지 않
+                 으나 기본적인 구조를 이해하는데 도움이 될 것이다. 여기서 scroll-behavior:smooth 속성은 부드러운 스크롤링 기능을 제공하는데
+                 좀 더 디테일하게 부드러운 스크롤링 원한다면 scrollTo 플러그인을 사용하면 된다.
+        -->
+    </head>
+
+    <body>
+        <nav>
+            <a href="#eu" class="nav_btn">Europe</a>
+            <a href="#kr" class="nav_btn">Korea</a>
+            <a href="#ch" class="nav_btn">China</a>
+            <a href="#jp" class="nav_btn">Japan</a>
+        </nav>
+
+        <section id="eu" class="page1"><h2>Europe</h2></section>
+        <section id="kr" class="page2"><h2>Korea</h2></section>
+        <section id="ch" class="page3"><h2>China</h2></section>
+        <section id="jp" class="page4"><h2>Japan</h2></section>
+    </body>
+</html>

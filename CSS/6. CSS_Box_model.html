@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CSS - Box model </title>
+
+        <!-- 26. Box model이란 HTML 태그 요소를 하나의 박스로 보고, 박스 크기, 색, 여백 등 태그를 박스로 다루는 체계이다. 
+                 박스 모델은 HTML 태그의 모양을 보는 CSS의 근본적인 시각이므로 매우 중요하다. 박스 모델의 구성은 패딩, 테
+                 두리, 여백, 콘텐츠 이 4가지로 구성되며, 구조는 아래와 같다.
+        
+                 ***********************************************
+                 *                   margin                    *
+                 *    +++++++++++++++++++++++++++++++++++++    *
+                 *    +              border               +    *
+                 *    +    ###########################    +    *
+                 *    +    #         padding         #    +    *
+                 *    +    #    -----------------    #    +    *
+                 *    +    #    |    content    |    #    +    *
+                 *    +    #    -----------------    #    +    *
+                 *    +    ###########################    +    *
+                 *    +++++++++++++++++++++++++++++++++++++    *
+                 ***********************************************
+
+                 ※ 콘텐츠(contents) : HTML 태그의 텍스트나 이미지 부분
+                 ※ 패딩(padding) : 콘텐츠를 둘러싸고 있는 내부 여백
+                 ※ 테두리(border) : 패딩 외부의 외곽선으로 직선이나 점선, 이미지 등을 입힐 수 있음
+                 ※ 여백(margin) : 박스의 맨 바깥 영역
+        -->
+
+        <style>
+            span {background : deepskyblue;}
+            div.box{
+                width : 150px;
+                height : 50px;
+                /* 27. contents는 크기 관련 프로퍼티가 있으며, 아래와 같다.
+                ----------------------------------------------------------
+                       ※ 크기 관련 프로퍼티 : width, height
+                */
+
+                padding: 2px;
+                background-color : yellow;
+                /* 28. padding은 크기 관련 프로퍼티가 있으며, 아래와 같다. 색 관련 프로퍼티가 없기에 background로 지정한다.
+                -----------------------------------------------------------------------------------------------------
+                       ※ 크기 관련 프로퍼티 : padding-top | right | bottom | left
+                       ※ 크기 관련 단축 프로퍼티 : padding
+                */
+
+                border-width : 3px;
+                border-style : dotted;
+                border-color : peru;
+                /* 29. border은 크기, 스타일, 색 관련 프로퍼티가 있으며, 아래와 같다.
+                -------------------------------------------------------------------------------------------
+                       ※ 크기 관련 프로퍼티 : border-top | right | bottom | left-width
+                       ※ 크기 관련 단축 프로퍼티 : border-width 
+                       ※ 스타일 관련 프로퍼티 : border-top | right | bottom | left-style
+                       ※ 스타일 관련 단축 프로퍼티 : border-style --> (none, dotted, dashed, solid 등이 존재)
+                       ※ 색 관련 프로퍼티 : border-top | right | bottom | left-color
+                       ※ 색 관련 단축 프로퍼티 : border-color
+                       ※ 전체 단축 프로퍼티 : border --> ("border : width style color" 형식으로 지정)
+                */
+
+                margin : 30px;
+                /* 30. margin은 크기 관련 프로퍼티가 있으며, 아래와 같다. 색은 본래 투명하나 부모 태그의 배경 색을 따른다.
+                ---------------------------------------------------------------------------------------------------
+                       ※ 크기 관련 프로퍼티 : margin-top | right | bottom | left
+                       ※ 크기 관련 단축 프로퍼티 : margin
+                */
+            }
+
+            #Rad{
+                    background : lightgreen;
+                    border-radius : 50px 0px 20px 30px;
+                }
+                /* 31. border-radius는 모서리 테두리를 세밀하게 제어한다. 문법은 다음과 같다.
+                -------------------------------------------------------------------------------------------------
+                       border-radius : border-top-left, border-top-right, border-bottom-left, border-bottem-right
+                */
+
+            #Img{
+                border : 20px soild orange;
+                border-image : url("C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Border.png") 27 round;
+            }
+            /* 32. border-image는 테두리에 이미지를 입힐 수 있다. 문법은 아래와 같다.
+            ---------------------------------------------------------------------------------------------
+                   border-image : url("이미지 URL")  이미지에서 떼어낼 픽셀 수  Edge 이미지 배치 종류
+                   --------------------------------------------------------------------------------------
+                   ※ Edge 이미지 배치 종류는 다음과 같다.
+                      round : 테두리 길이만큼 에지 이미지 크기 자동 조절해 에지 이미지를 반복 배치한다.
+                      repeat : 에지 이미지 크기 자동 조절하지 않고 에지 이미지를 반복 배치한다.
+                      stretch : 에지 이미지를 테두리 길이만큼 늘여 배치한다.
+                   
+                   ※ 이미지를 이미 있는 테두리에 입히는 것이기에 border-width와 style은 지정이 되어있어야 한다.
+            */
+
+            div.back{
+                width : 300px;
+                height : 300px;
+                background-color :  skyblue;
+                /* 33. background-color는 HTML 태그에 배경색을 칠한다. */
+
+                background-image : url("C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Java.PNG");
+                /* 34. background-image는 HTML 태그에 배경 이미지를 출력한다. */
+
+                background-position : center center;
+                /* 35. background-position는 배경 이미지 위치를 지정한다. 좌표는 x, y 순서이다. */
+
+                background-size : 100px 100px;
+                /* 36. background-size는 배경 이미지의 크기를 지정한다. 좌표는 x, y 순서이다. */
+
+                background-repeat : repeat-y;
+                /* 37. background-repeat는 배경 이미지를 반복 출력한다. repeat-x는 x축으로 반복한다. */
+            }
+
+            div.shadow_text{text-shadow : 3px 3px 5px red;}
+            /* 38. text-shadow 프로퍼티는 텍스트에 그림자 효과를 줄 수 있다. 문법은 아래와 같다. 
+            ---------------------------------------------------------------------------------------------
+                   ※ text-shadow : h-shadow  v-shadow  blur-radius  color
+                   --------------------------------------------------------------------------------------
+                      h-shadow : 원본 텍스트와 그림자 텍스트 사이의 수평 거리를 나타낸다. (필수 입력)
+                      v-shadow : 원본 텍스트와 그림자 텍스트 사이의 수직 거리를 나타낸다. (필수 입력)
+                      blur-radius : 흐릿한 그림자를 만드는 효과로, 흐릿하게 번지는 길이를 나타낸다. (선택 입력)
+                      color : 그림자 색을 나타낸다. none일 경우 색을 나타내지 않는다.
+            */
+
+            div.shadow_box{
+                width : 300px;
+                height : 300px;
+                background-image : url("C:\Users\eungj\OneDrive\바탕 화면\Vscode_Test_01\Java.PNG");
+                box-shadow: 10px 10px 5px darkblue;
+            }
+            /* 39. box-shadow 프로퍼티는 박스 전체에 그림자 효과를 줄 수 있다. 문법은 아래와 같다. 
+            -----------------------------------------------------------------------------------
+                   ※ box-shadow : h-shadow  v-shadow  blur-radius  spread-radius  color  inset
+                   ----------------------------------------------------------------------------
+                      spread radius : 그림자 크기를 나타낸다. (선택 입력)
+                      inset : 음각 박스로 보이게 박스 상단 안쪽(왼쪽과 위쪽)에 그림자를 형성한다.
+            */
+        </style>
+    </head>
+
+    <body>
+        <div class="box">
+            <span>This is &ltdiv&gt tag contents area</span>
+        </div><hr>
+        <p id="Rad">Border-radius</p><hr>
+        <p id="Img">Border-image</p><hr>
+        <div class="back">Background</div><hr>
+        <div class="shadow_text">Drop shadow</div><hr>
+        <div class="shadow_box">Shadow box</div>
+
+        <p style="cursor:help">Locate mouse here, and see yout cursor</p>
+        <!-- 40. cursor 프로퍼티를 이용하면 HTML 태그 위에 출력되는 마우스의 커서 모양을 지정할 수 있다.
+        ------------------------------------------------------------------------------------------
+                 cursor와 value 값으로만 구성되며, value는 help, pointer, copy 등 셀 수 없이 많다.
+        -->
+    </body>
+</html>

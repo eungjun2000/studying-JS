@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Jquery - Event </title>
+        <!-- 57. 제이쿼리에서의 이벤트 등록 메소드는 하나의 이벤트만을 등록하는 단독 이벤트 등록 메소드와 2개 이상의 이벤트를 등
+                 록할 수 있는 그룹 이벤트 등록 메소드가 있다. 그룹 이벤트 등록 메소드는 on(), bind(), delegate(), one()이 있다.
+        -->
+
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script>
+            $(function(){
+                $("#btn1").click(function(){
+                    $("#btn1").css("color", "red");
+                });
+                /* 58. 단독 이벤트 등록 메소드 사용의 기본형은 아래와 같다.
+                ----------------------------------------------------------------------------
+                       $("이벤트 대상 선택").이벤트 등록 메소드(function(){자바스크립트 코드});
+                */
+                $("#btn2").on({
+                    "mouseover focus" : function(){
+                        $("#btn2").css("color", "blue");
+                    },
+                    "mouseover blur" : function(){
+                        $("#btn2").css("color", "black");
+                    }
+                });
+                /* 59. 그룹 이벤트 등록 메소드는 on() 메소드를 이용해 이벤트를 등록하며, 형태는 3가지가 있다. 
+                -----------------------------------------------------------------------------------------
+                       ※ $("이벤트 대상 선택").on("이벤트 종류1, ..., 이벤트 종류n",
+                                function(){
+                                    자바스크립트 코드;
+                          });
+
+                       ※ $("이벤트 대상 선택").on({"이벤트 종류1, ..., 이벤트 종류n" : function(){
+                                자바스크립트 코드;
+                              }
+                          });
+
+                       ※ $("이벤트 대상 선택").on({
+                                "이벤트 종류1" : function() {자바스크립트 코드};
+                                " ... "
+                                "이벤트 종류n" : function() {자바스크립트 코드};
+                          });
+                */
+
+                $(document).on("mouseover", "#btn3", function(){
+                    $("#btn3").css("color", "blue");
+                });
+                $("#btn3").addClass("on");
+                /* 60. on() 메소드는 라이브 이벤트 등록 방식이 아니라 이벤트를 등록한 다음 새롭게 생성되거나 복제된 요소에는 이
+                       벤트를 등록할 수 없다. 다만 아래와 같이 하면 동적으로 생성된 요소에도 이벤트가 등록된다.
+                ----------------------------------------------------------------------------------------------------------
+                       $([document|"이벤트 대상의 상위 요소 선택"]).on("이벤트 종류", "이벤트 대상 선택", function(){코드});
+                */
+
+                $(".dele_wrap").delegate(
+                    "#btn5",
+                    "click", function(){
+                        alert("Delegate example successed.");
+                });
+                /* 61. delegate() 메소드는 선택한 요소의 특정 하위 요소를 선택해 이벤트를 등록한다. */
+
+                $("#btn6").one({
+                    "mouseover focus" : function(){
+                        alert("Hello");
+                    }
+                });
+                /* 62. one() 메소드는 등록한 이벤트 대상 요소가 1회 발생할 경우 자동으로 해제된다. */
+                
+                $("#btn2").off("mouseover focus");
+                /* 63. 이벤트 제거 메소드를 이용해 이벤트를 제거할 수 있다. 종류는 아래와 같다.
+                ---------------------------------------------------------------------------
+                       ※ off() : on() 메소드로 등록한 이벤트를 제거한다.
+                       ※ unbind() : unbind() 메소드로 등록한 이벤트를 제거한다.
+                       ※ undelegate() : undelegate() 메소드로 등록한 이벤트를 제거한다.
+                */
+
+                /* 64. 마우스, 키보드 관련 이벤트는 "Etc/1.Make_Event.html" 문서 부분을 참고할 것 */
+            });
+        </script>
+    </head>
+
+    <body>
+        <button id="btn1">Button</button><hr>
+        <button id="btn2">Button_2</button><hr>
+        <button id="btn3">Button_live event register</button><hr>
+        <div class="dele_wrap">
+            <button id="btn4">Button by delegate() method</button><hr>
+            <button id="btn5">Button by delegate() method_2</button><hr>
+        </div>
+        <button id="btn6">Button by one() method</button>
+    </body>
+</html>

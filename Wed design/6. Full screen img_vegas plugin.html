@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\vegas\vegas.js"></script>
+        <link rel="stylesheet" href="C:\Web_Plugin\vegas\vegas.min.css">
+    </head>
+
+    <body>
+        <script>
+            $(function(){
+                $("body").vegas({
+                    slides:[{src:"C:/Users/eungj/Downloads/Img_for_web/Europe.jpg"},
+                            {src:"C:/Users/eungj/Downloads/Img_for_web/Korea.jpg"},
+                            {src:"C:/Users/eungj/Downloads/Img_for_web/China.jpg"},
+                            {src:"C:/Users/eungj/Downloads/Img_for_web/Japan.jpg"},
+                            {src:"C:/Users/eungj/Downloads/Img_for_web/Train.jpg", // 영상 재생 불가 시 보여줄 포스터 이미지
+                                video:{
+                                    src:["C:/Users/eungj/OneDrive/바탕 화면/Vscode_Test_01/Train.mp4"],
+                                    loop:false,
+                                    mute:true
+                                }
+                            }
+                    ],
+                    delay:3500
+                });
+            });
+            /* 13. backstretch 플러그인과 더불어 풀 스크린 배경에 사용하는 플러그인 중에 vegas 플러그인이 있다. $.vegas() 메소드를 이용해 
+                   vegas 플러그인을 사용할 수 있다. 문법은 다음과 같다.
+            ---------------------------------------------------------------------------------------------------------------------
+                   $(대상).vegas({
+                       slides:[{src:"파일1"},{src:"파일2"}, ..., {src:"파일n"}]
+                   });
+
+                   ※ delay 속성을 이용해 슬라이드 간 전환 속도를 제어할 수 있다.
+                   
+                   ※ video 속성을 이용해 동영상도 슬라이드에 추가할 수 있다.
+
+                   ※ vegas 플러그인에는 slides 속성 밖에 preload, timer, overlay, autoplay, delay, cover, align, transition 등 다양
+                      한 속성들이 있다.
+            */
+        </script>
+    </body>
+</html>

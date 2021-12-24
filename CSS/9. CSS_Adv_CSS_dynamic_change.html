@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CSS - Advanced CSS - dynamic change </title>
+        <!-- 57. CSS는 자바스크립트를 사용하지 않고서도 HTML 태그의 모양에 동적인 변화를 줄 수 있다. CSS로 만들어낼 수 있는
+                 동적인 변화는 애니메이션(animation), 전환(transition), 변환(transform)이 있다.
+        -->
+
+        <style>
+            @keyframes rgb_bomb{
+                from {font-size : 300%; color : blue;}
+                50% {font-size : 200%; color : green;}
+                to {font-size : 100%; color : red;}
+                /* 58. @keyframes는 시간 별로 HTML 태그가 변화하는 장면들을 작성한다. 문법은 아래와 같다.
+                -------------------------------------------------------------------------------------------------
+                       @keyframes name{
+                           시간 비율 {스타일; 스타일; ...;} --> 시간비율 시점까지 적용할 스타일 시트 작성
+                           ...
+                           시간 비율 {스타일; 스타일; ...;} --> 이전 시점에서 시간비율 시점까지 적용할 스타일 시트 작성
+                       }
+                       ------------------------------------------------------------------------------------------
+                       ※ 애니메이션이 이루어지는 시간은 전체 애니메이션 시간에 대한 비율로 나타낸다. %나 from, to로 나
+                          타낸다. from은 0%, to는 100%와 의미가 같고, 바꿔쓸 수 있다.
+                */
+            }
+            h3{
+                animation-name : rgb_bomb;
+                animation-duration : 3s;
+                animation-iteration-count : 1;
+                /* 59. 애니메이션 관련 CSS 프로퍼티는 여러 가지가 있으나. 대표적인 것 3개만 본다. 
+                ------------------------------------------------------------------------------------------
+                       ※ animation-name : @keyframes의 name을 지정한다.
+                       ※ animation-duration : 1회 애니메이션의 시간을 지정한다.
+                       ※ animation-iteration-count : 숫자로 주면 해당 숫자만큼 반복, infinite는 무한 반복한다.
+                */
+            }
+
+            span{
+                transition : font-size 5s;
+                /* 60. transition 프로퍼티는 HTML 태그에 적용된 CSS 프로퍼티 값이 변할 때, 값의 변화를 서서히 진행시켜
+                       1회성 애니메이션 효과를 낸다. 문법은 아래와 같다.
+                -------------------------------------------------------------------------------------------------
+                       ※ transition : 전환 프로퍼티  전환 시간
+                */
+            }
+            span:hover{
+                font-size : 500%;
+            }
+
+            div{
+                display : inline-block;
+                padding : 5px;
+                color : white;
+                background : olivedrab;
+            }
+            /* 61. tranform 프로퍼티는 텍스트나 이미지를 회전이나 확대 등 다양한 기하학적 모양으로 출력할 수 있다. */
+            div#rotate{transform : rotate(20deg);}
+            /* 62. tranform 프로퍼티를 rotate로 지정하면 태그를 2차원 특정 각도(deg)만큼 회전시킨다. */
+
+            div#skew{transform : skew(0deg, -20deg);}
+            /* 63. tranform 프로퍼티를 skew로 지정하면 태그를 2차원 특정 각도(deg)만큼 기울인다. 함수는 다음과 같다.
+            --------------------------------------------------------------------------------------------------
+                   ※ skew(x-angle, y-angle) : 태그를 X축과 Y축을 기준으로 x-angle, y-angle만큼 기울인다.
+                   ※ skew(angle) : 태그를 X축을 기준으로 angle 각도만큼 기울인다.
+                   ※ skew(angle) : 태그를 Y축을 기준으로 angle 각도만큼 기울인다.
+            */
+
+            div#translte{transform : translateY(100px);}
+            /* 64. tranform 프로퍼티를 translate로 지정하면 태그를 2차원 특정 축만큼 이동한다. 함수는 다음과 같다.
+            ------------------------------------------------------------------------------------------------
+                   ※ translate(x, y) : 태그를 X축, Y축으로 x, y만큼 이동한다.
+                   ※ translateY(n) : 태그를 X축으로 n만큼 이동한다.
+                   ※ translateX(n) : 태그를 Y축으로 n만큼 이동한다.
+            */
+
+            div#scale{transform : scale(3,1);}
+            /* 65. tranform 프로퍼티를 scale로 지정하면 태그의 폭, 넓이를 특정 수치만큼 조절한다. 함수는 다음과 같다.
+            ---------------------------------------------------------------------------------------------------
+                   ※ scale(w, h) : 태그와 폭의 높이를 각각 w, h배 만큼 조절한다.
+                   ※ scaleX(n) : 태그의 폭을 n배 만큼 조절한다.
+                   ※ scaleY(n) : 태그의 높이을 n배 만큼 조절한다.
+            */
+        </style>
+    </head>
+
+    <body>
+        <h3>RGB_Bomb</h3><hr>
+        <p><span>Bigger!!</span>&lt-- put mouse on letter</p><hr>
+        <div id="rotate">rotate(20deg)</div>
+        <div id="skew">skew(0,-20deg)</div>
+        <div id="translate">translateY(100px)</div>
+        <div id="scale">scale(3,1)</div>
+    </body>
+</html>

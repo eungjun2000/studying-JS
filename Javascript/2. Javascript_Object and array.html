@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Javascript - Core object and array </title>
+        <!-- 9. 자바스크립트에서의 객체(object)란 실세계에 존재하는 속서와 값으로 표현되는 모든 것들이다. 예로 자동차라는 객체는
+                제조사, 배기량, 색상, 번호판이라는 속성들이 있다. 객체의 고유한 속성을 프로퍼티(property)라고 하며, 객체는 여러
+                프로퍼티와 값의 쌍으로 표현된다. 또한 객체는 객체 내부의 프로퍼티 값을 조작하거나 값을 반환하며, 객체나 코드로부
+                터 호출되는 함수가 있으며, 이러한 함수는 메소드(method)라 부른다. 자바스크립트는 개발자가 직접 코드로 객체를 만
+                들어 사용할 수도 있으나, 브라우저는 많은 자바 스크립트 객체들을 만들어 제공하기에 이걸 가져다 사용하기만 하면 된
+                다. 제공되는 객체들은 아래와 같은 3가지 유형으로 나뉜다.
+                --------------------------------------------------------------------------------------------------------
+                ※ 코어 객체 : 기본 객체로서 Array, Date, String, Math 타입 등이 존재하며, 웹 페이지, 서버 응용프로그램 어디서
+                              나 사용될 수 있는 객체들이다.
+
+                ※ HTML DOM 객체 : HTML 페이지에 작성된 HTML 태그들을 브라우저가 하나씩 객체화한 것들로 HTML 페이지의 내용과 모
+                                   양을 제어하기 위해 사용되는 객체이다.
+
+                ※ 브라우저 관련 객체(BOM) : 브라우저의 종류나 스크린의 크기 정보를 제공하거나 새 윈도우를 생성하는 등 브라우저와
+                                           관련된 객체들이다.
+        -->
+    </head>
+
+    <body>
+        <script>
+            var array = [1,2,3];
+            array[3] = 4;
+            document.write(array + "<hr>");
+            /* 10. 자바스크립트의 배열은 []로 배열 원소를 다룬다.
+            ----------------------------------------------------------------------------------------------------------
+                   ※ 위에서 array[3]은 배열의 범위를 벗어났지만, 자바스크립트의 배열은 배열의 범위를 벗어나더라도 이를 오류로
+                      처리하지 않기에 상관없다. 넘어가는만큼 배열의 크기를 늘리고 값을 저장한다. 단, 원소 추가는 맨 끝에 한 개
+                      씩만 가능하다. 뛰어넘어 저장하면 공백 처리한다.
+            */
+
+            var medal = new Array();
+            medal[0] = "Bronze";
+            medal[1] = "Silver";
+            medal[2] = "Gold";
+            document.write(medal + "<br>"); 
+            /* 11. Array 코어 객체를 이용해 배열을 객체로 다룰 수 있다. Array 객체 생성 방법은 아래와 같다. 
+            ------------------------------------------------------------------------------------------
+                   ※ new Array() : 빈 배열을 생성한다. 원소를 추가할 때마다 배열 크기가 자동으로 늘어난다.
+                   ※ new Array(size) : size 개수의 초기화되지 않은 배열을 생성한다.
+                   ※ new Array(e1, e2, ..., en-1) : n개 원소에 대한 초기값과 함께 배열을 생성한다.
+            */
+
+            var a1 = new Array("Kim", "Bark", "Lee");
+            var a2 = new Array("Kang");
+            var a3;
+            a3 = a1.concat(a2);
+            document.write(a3 + "<br>");
+            /* 12. 또한 Array는 여러 개의 주요 메소드들을 가지고 있다.
+            ----------------------------------------------------------------------------------
+                   ※ concat(arr) : 현재 배열에 배열 arr의 원소들을 덧붙여 만든 새 배열을 리턴한다.  
+            */
+            a3 = a1.join("##"); document.write("concat : " + a3 + "<br>");
+            /* 13. join([seperator]) : 배열의 모든 원소를 연결해 seperator 문자열로 구분된 하나의 문자열을 리턴한다. */
+            a3 = a1.reverse(); document.write("reverse : " + a3 + "<br>");
+            /* 14. reverse : 원소를 역순으로 재배열하고, 이를 복사한 새로운 배열을 리턴한다. */
+            a3 = a1.slice(1,2); document.write("slice : " + a3 + "<br>");
+            /* 15. slice(idxA[,idxB]) : 인덱스 idxA와 idxB 사이 원소들로 구성된 새 배열 리턴, idxB는 포함되지 않는다. */
+            a3 = a1.toString(); document.write("toString : " + a3 + "<hr>");
+            /* 16. toString() : 원소들을 모두 연결해 하나의 문자열을 "," 구분자로 구분한 배열을 리턴한다. */
+
+            var d = new Date();
+            /* 17. Date 코어 객체를 이용해 시간 정보를 담을 수 있다. Date 객체 생성 방법은 아래와 같다. 
+            ----------------------------------------------------------------------------------------------------
+                   ※ new Date() : 현재 날짜와 시간 값으로 초기화된 객체를 생성한다.
+                   ※ new Date(y,m,d) : y, m, d는 각각 년, 월, 일을 나타내며, 이 시간 정보를 가진 객체를 생성한다.
+                   ※ new Date(y,m,d,hour,min,sec) : 각각 "년, 월, 일, 시, 분, 초" 시간 정보를 가진 객체를 생성한다.
+            */
+
+            document.write(d.getFullYear()+" "+d.getMonth()+" "+d.getDate()+" "+d.getDay() + "<br>");
+            /* 18. 또한 Date는 여러 개의 주요 메소드들을 가지고 있다.
+            -----------------------------------------------------------------------------------
+                   ※ getFullYear(), getMonth(), getDate(), getDay() : 년, 달, 월, 일을 리턴한다.  
+            */
+            document.write(d.getHours()+" "+d.getMinutes()+" "+d.getSeconds()+" "+d.getMilliseconds() + "<br>");
+            /* 19. getHours(), getMinutes(), getSeconds(), getMilliseconds() : 시간, 분, 초, 밀리초를 리턴한다. */
+            document.write("getTime : " + d.getTime() + "<br>");
+            /* 20. "1970.1.1 0:0:0" 날짜를 기준으로 현재까지 경과된 밀리초 개수를 리턴한다. */
+            document.write("toLocalString : " + d.toLocaleString() + "<br>");
+            /* 21. toLocaleString() : 객체에 든 정보를 현지 문자열 표현식으로 리턴한다. */
+            document.write("toLocaleTimeString : " +  d.toLocaleTimeString() + "<br>");
+            /* 22. toLocaleTimeString() : 객체에 든 정보를 00:00:00 표현식으로 리턴한다. */
+            document.write("toUTCString : " + d.toUTCString() + "<hr>");
+            /* 23. toUTCString() : 객체에 든 정보를 UTC 문자열로 리턴한다. */
+            
+            var s1 = new String("Java Script");  
+            /* 24. String 코어 객체를 문자열을 다룰 수 있다. String 객체는 문자열 수정이 불가능하다. */
+            var s2 = " Language";
+            document.write("charAt : " + s1.charAt(0) + "<br>");
+            /* 25. 또한 String은 여러 개의 주요 메소드들을 가지고 있다.
+            -----------------------------------------------------------------------------------
+                   ※ charAt(idx) : 인덱스 idx에 있는 문자를 문자열로 만들어 리턴한다.
+            */
+            document.write("concat : " + s1.concat(s2) + "<br>");
+            /* 26. concat(s1, s2, ..., sN) : 현재 문자열 뒤에 문자열 s1, s2, ..., sN을 나열한 문자열을 리턴한다. */
+            document.write("indexOf : " + s1.indexOf("v") + "<br>");
+            /* 27. indexOf(s[,idx]) : 인덱스 idx 위치부터 s가 처음으로 나타나는 인덱스를 리턴한다. 없다면 -1을 리턴한다. */
+            document.write("slice : " + s1.slice(5,8) + "<br>");
+            /* 28. slice(idxA[,idxB]) : 인덱스 idxA에서 idxB 앞까지 문자열을 복사해 리턴한다. */
+            document.write("substr : " + s1.substr(5,3) + "<br>");
+            /* 29. substr(idxA[,len]) : 인덱스 idx부터 len 문자 개수만큼 새로운 문자열을 리턴한다. */
+            document.write("toUpperCase : " + s1.toUpperCase() + "<br>");
+            /* 30. toUpperCase() : 대문자로 변환된 새로운 문자열을 리턴한다. */
+            document.write("replace : " + s1.replace("Script"," programming") + "<br>");
+            /* 31. replace(strA, strB) : 문자열 strA를 찾아 strB로 수정한 새로운 문자열을 리턴한다. */
+            document.write("split : " + s1.split(" ") + "<br>");
+            /* 32. split([seperator[,limit]]) : seperator 구분자로 문자열을 분리해 문자열 배열을 만들어 리턴한다. */
+            document.write("trim : " + s1.trim() + "<br>");
+            /* 33. trim() : 문자열의 앞뒤 공백 문자를 제거한 새로운 문자열을 리턴한다. */
+            document.write("substring : " + s1.substring(5,3) + "<hr>");
+            /* 34. substring(idxA, idxB) : idxA에서 idxB 앞까지 두 인덱스 사이의 문자열을 리턴한다. */
+       
+            document.write(Math.sqrt(4) + "<hr>");
+            /* 35. Math 객체는 수학 계산을 위해 아래와 같은 프로퍼티와 메소드를 제공한다. new를 통해 객체 생성은 하지 않는다. 
+            -------------------------------------------------------------------------------------------------------------
+                   ※ abs(x), sin(x), exp(x) : 각각 x의 절대값, 싸인 x 값, e^x 값을 리턴한다.
+                   ※ floor(x), round(x), sqrt(x) : 각각 x보다 이하 가장 큰 정수, x를 반올림한 정수, x의 제곱근 값을 리턴한다.
+                   ※ pow(x,y) : x^y 값을 리턴한다. 
+                   ※ random() : 0~1보다 작은 임의의 실수를 리턴한다.
+            */
+                 
+            var Calculator = {
+                Plus : function(a, b){return a + b;},
+                Minus : function(a, b){return a - b;}
+            };
+            document.write(Calculator.Plus(1,2) + "<br>");
+            document.write(Calculator.Minus(2,1) + "<hr>");
+            /* 36. 기본적으로 내장된 객체 말고 우리의 의도에 맞게 동작해야하는 객체를 만들어야 할 수 있다. 개발자가 선언하는 새로
+                   운 객체 타입은 프로토타입(prototype)이라고 한다. 위는 리터럴 표기법으로 객체를 만든 것이다.
+            */
+
+            function Grade(name, HTML, CSS, Javascript){
+                this.name = name;
+                this.HTML = HTML;
+                this.CSS = CSS;
+                this.Javascript = Javascript;
+                this.sum = function(){
+                     return HTML + CSS + Javascript;     
+                }
+            }
+            var Kim = new Grade('Kim', 60, 70, 90);
+            document.write(Kim.sum() + "<br>");
+            /* 37. 자바스크립트는 class의 개념이 없어(단, ES6부터 지원 시작) new와 function을 통해 객체 지향 방식을 흉내낼 수 
+                   있다. new를 통해 객체를 생성하고, 이 객체를 이용해 메소드(function)로 접근한다.
+            */
+
+            Grade.prototype.average = function(){
+                   return (this.HTML+this.CSS+this.Javascript)/3;
+            }
+            document.write(Kim.average() + "<hr>");
+            /* 38. prototype이란 자신이 만들어낸 객체의 원형이다. 특정 객체의 메소드를 다른 객체들이 참조할 수 있게 해준다. */
+
+            var super_object = {
+                   super_value : 'super'
+            }
+            var sub_object = {
+                   sub_value : 'sub'
+            }
+            sub_object.__proto__ = super_object;
+            document.write(sub_object.super_value);
+            /* 39. __proto__는 객체 간 상속을 흉내낸다. 이를 통해 상위 프로토타입으로 접근하는 것을 프로토타입 링크라고 한다. */
+        </script>
+    </body>
+</html>

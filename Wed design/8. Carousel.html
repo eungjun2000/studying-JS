@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <script src="C:\Web_Plugin\bxslider-4-4.2.12\src\js\jquery.bxslider.js"></script>
+        <link rel="stylesheet" href="C:\Web_Plugin\bxslider-4-4.2.12\src\css\jquery.bxslider.css">
+
+        <script src="C:\Web_Plugin\OwlCarousel2-2.3.4\OwlCarousel2-2.3.4\dist\owl.carousel.js"></script>
+        <script src="C:\Web_Plugin\OwlCarousel2-2.3.4\OwlCarousel2-2.3.4\src\js\owl.autoplay.js"></script>
+        <script src="C:\Web_Plugin\OwlCarousel2-2.3.4\OwlCarousel2-2.3.4\src\js\owl.navigation.js"></script>
+        <link rel="stylesheet" href="C:\Web_Plugin\OwlCarousel2-2.3.4\OwlCarousel2-2.3.4\dist\assets\owl.carousel.css">
+        <link rel="stylesheet" href="C:\Web_Plugin\OwlCarousel2-2.3.4\OwlCarousel2-2.3.4\dist\assets\owl.theme.default.css">
+
+        <style>
+            #wrapper{
+                width : 600px;
+                margin : 0 auto;
+            }
+        </style>
+        <script>
+            $(function(){
+                $(".country").bxSlider({
+                    slideWidth : 600,
+                    captions : true,
+                    auto : true,
+                    autoControls : true,
+                    stopAutoOnclikc : true
+                });
+            });
+        </script>
+        <!-- 15. 캐러셀은 여러 내용이 슬라이드처럼 자동으로 흘러가게 하는 방식이다. 캐러셀을 만들어주는 플러그인 중 자주 쓰이는 것은 bxSider
+                 플러그인이다. $("요소").bxSlider()로 접근하며, 주로 쓰는 옵션들은 다음과 같다.
+                 -----------------------------------------------------------------------------------------------------------------
+                 ※ slideWidth : 슬라이드 너비 값을 조절한다.
+                 ※ captions : 이미지에 캡션을 추가한다. 각 이미지마다 title 속성을 사용해 표시할 내용을 지정한다.
+                 ※ auto : 슬라이드 쇼를 자동 실행한다.
+                 ※ autoControls : Start/Stop 컨트롤 버튼을 표시한다.
+                 ※ stopAutoOnclick : 클릭해서 자동 실행을 멈출 수 있도록 지정한다.
+                 
+                 ※ 그 밖에 mode, speed, video, touchEnabled, prevText, autoHover, adaptiveHeight 등 다양한 옵션이 존재한다.
+        -->
+
+        <script>
+            $(function(){
+                $(".owl-carousel").owlCarousel({
+                    items : 3,
+                    margin : 10,
+                    loop : true,
+                    autoplay : true,
+                    nav : true,
+                    navText : ['이전', '다음'],
+                    autoplayTimeout : 3000,
+                    autoplayHoverPause : true
+                });
+            });
+        </script>
+        <!-- 16. bxSlider 외에 owlCarousel 플러그인도 캐러셀 구현을 위해 자주 쓰인다. bxSlider가 한 번에 하나의 이미지만 표시했다면, owl
+                 Carousel은 한 화면에 여러 개의 이미지를 표시할 수 있고, 그 밖의 다양한 기능들을 제공한다. 주로 쓰는 옵션들은 다음과 같다.
+                 ----------------------------------------------------------------------------------------------------------------
+                 ※ items : 화면에 보여줄 항목 개수를 숫자로 조절한다.
+                 ※ margin : 항목의 오른쪽 마진을 픽셀 단위로 지정한다.
+                 ※ loop : 무한 반복 여부를 지정한다.
+                 ※ nav : 내비게이션 점 링크 위에 prev나 next같은 버튼을 표시한다.
+                 ※ navText : 내비게이션 버튼의 텍스트를 수정한다. 대괄호 안에 묶에 배열로 지정한다.
+                 ※ autoPlay : 슬라이드쇼를 자동 실행한다.
+                 ※ autoplayTimeout : 자동 스크롤 시간 간격을 지정한다.
+                 ※ autoplayHoverPause : 내용 위로 마우스 포인터가 올라가면 자동 스크롤이 일시정지된다.
+                 ※ autoplaySpeed : 자동 스크롤 속도를 지정한다.
+        -->
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div class="country">
+                <div><img src="C:/Users/eungj/Downloads/Img_for_web/Europe.jpg" title="Europe"></div>
+                <div><img src="C:/Users/eungj/Downloads/Img_for_web/Korea.jpg" title="Korea"></div>
+                <div><img src="C:/Users/eungj/Downloads/Img_for_web/China.jpg" title="China"></div>
+                <div><img src="C:/Users/eungj/Downloads/Img_for_web/Japan.jpg" title="Japan"></div>
+            </div>
+        </div><hr>
+
+        <div id="wrapper">
+            <div class="owl-carousel owl-theme"> <!-- nav/navText 옵션을 위해 owl-theme 클래스 추가-->
+                <div class="item"><img src="C:/Users/eungj/Downloads/Img_for_web/Pizza.jpg"></div>
+                <div class="item"><img src="C:/Users/eungj/Downloads/Img_for_web/Donut.jpg"></div>
+                <div class="item"><img src="C:/Users/eungj/Downloads/Img_for_web/Fish.jpg"></div>
+                <div class="item"><img src="C:/Users/eungj/Downloads/Img_for_web/Europe.jpg"></div>
+                <div class="item"><img src="C:/Users/eungj/Downloads/Img_for_web/Korea.jpg"></div>
+                <div class="item"><img src="C:/Users/eungj/Downloads/Img_for_web/China.jpg"></div>    
+            </div>
+        </div>
+    </body>
+</html>

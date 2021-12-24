@@ -1,0 +1,90 @@
+<!DOCTYPE html> <!-- 1. <DOCTYPE html>은 브라우저에게 HTML5 문서임을 알린다. -->
+<meta charset="UTF-8">
+<html>
+    <!-- 2. HTML 문서의 구성 요소들은 태그인데, 태그 이름과 요소들로 구성되며, <html>, <head>, <title>, <h1>, <img>, <figure> 등 100여개가 존재한다. -->
+    
+    <head> 
+        <!-- 3. <head>로 둘러싼 부분은 문서의 제목, javascript 코드, CSS 스타일 시트, 본문을 설명하는 메타 테그들 등을 포함하며, 문서의 본문은 포함되지 않는다. -->
+    
+        <title> First Title </title>
+        <!-- 4. <title>은 브라우저 페이지 타이틀 바에 출력되며, 반드시 <head> 내에서만 작성되야 한다. -->
+    
+    </head>
+    
+    <body>
+        <!-- 5. <body>로 둘러싼 부분은 문서의 본문이 들어가며, 이곳에 javascript 코드가 포함될 수 있다. 헤드와 바디 사이에는 그 무엇도 들어갈 수 없다.-->
+    
+        This part is Text Context
+        <h1>This part is Text Context made by "h1" tag</h1>
+        <h6>This part is Text Context made by "h6" tag</h6>
+        <!-- 6. <h?>는 heading(제목)으로, ?에는 1부터 6까지 지원한다. 문단의 크기를 조절해준다. 1로 갈수록 커지고, 6으로 갈수록 작아진다. -->
+    
+        <h3 title="This is Tooltip">Locate Mouse Here</h3>
+        <!-- 7. title 속성으로 마우스를 올리면 툴팁이 출력되게 할 수 있다. -->
+    
+        <p>
+        Using p Tag to
+        </p>
+        <p>
+        Divide Paragraph
+        </p>
+        <!-- 8. <p>는 문단을 여러 단락으로 나눌 수 있게 해준다. </p>로 끝나는 문단 다음에는 자동으로 빈 줄이 생긴다. -->
+    
+        <hr>
+        <h3>Horizontal Line</h3>
+        <!-- 9. <hr>은 수평선을 삽입한다. 종료 태그(</hr>)은 존재하지 않는다. -->
+    
+        Jump Where? <br> Another Line <br><br>
+        <!-- 10. <br>은 새로운 줄로 넘어간다. HTML은 엔터를 치더라도 한 개의 빈칸으로 처리되어 다음 줄로 넘어가지 않기에 지원하는 태그이다. -->
+    
+        2 &nbsp; &lt; &nbsp; 3 <br>
+        <!-- 11. HTML 문서는 어떤 언어나 문자도 표현할 수 있으나, 예약어나 키보드로 칠 수 없는 기호를 입력하는 방법을 제공한다.
+        ---------------------------------------------------------------------------------------------------------------
+                 ※ 대표적인 문자 & 기호의 엔터티와 코드 표현 사례 - (외우려고 들지는 말 것...)
+                    "  |  &quot; |  &#34;
+                    '  |  &apos; |  &#39;
+                    <  |  &lt;   |  &#60;
+                    >  |  &gt;   |  &#62;
+                    &  |  &amp;  |  &#38;
+                    blank|  &nbsp; |  &#160;
+                 ----------------------------------------------------------------------------------------------------------
+                 ※ &?는 엔터티표현, &#?은 코드표현으로, 둘 다 써도 상관 없다.
+        -->
+    
+        <p>
+            I   Can Write
+                 Whatever I     Want !!
+        </p>
+        <pre>
+            I   Can Write
+                 Whatever I     Want !!
+        </pre>
+        <!-- 12. <pre>는 여러 개의 빈칸이나 엔터를 모두 하나의 빈칸으로 처리하는 HTML의 특성을 무시하고 개발자가 의도한 포맷으로 출력되게 한다. -->
+    
+        <b>Deeper</b><br>
+        <em>Emphasize</em><br>
+        <i>Italic</i><br>
+        <del>Delete</del><br>
+        <ins>Insert</ins><br>
+        A<sup>a</sup><br>
+        B<sub>b</sub><br>
+        <mark>Highlighting</mark><br>
+        <strong>Stronger</strong><br>
+        <!-- 13. HTML은 단어나 문자를 강조하거나 첨자를 표현하는 등의 텍스트에 의미를 부여할 수 있다. 위의 태그들이 예제들이다. -->
+    
+        <div style="background-color:aquamarine;padding:20px">
+        We have to learn HTML.
+        <span style="color:red">Plus,</span>
+        We have to learn CSS.
+        <span style="color:red">Plus,</span>
+        We have to learn Javascript.
+        </div>
+        <!-- 14. HTML 태그들은 블록 택그와 인라인 태그로 나뉜다. 블록 태그는 <p>, <h1>, <div> 등, 인라인 태그는 <a>, <img>, <span> 등이 있다.
+        ----------------------------------------------------------------------------------------------------------------------------------
+                 ※ 블록 태그 : 항상 새 라인에서 시작해 브라우저 왼쪽 끝에서 오른쪽 끝까지 블록 공간을 차지한다.
+                 ※ 인라인 태그 : 블록 태그가 만든 블록에 삽입되어 블록 콘텐트의 일부를 표현하는데 사용된다.
+                 ※ 대표적인 블록 태그는 <div>로, <p>와 비슷해보이나 단순 문단을 만드는 <p>와는 다르게 <div>는 여러 HTML 태그들을 블록으로 묶는다.
+                 ※ 대표적인 인라인 태그는 <span>으로, 텍스트 일부분에 특별한 모양을 주거나 자바스크립트 코드로 텍스트 일부를 제어할 때 쓰인다. 
+        -->
+    </body>
+</html>

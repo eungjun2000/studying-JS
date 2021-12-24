@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Jquery - Basic jquery document </title>
+        <!-- 1. 자바스크립트의 문서 객체 모델인 DOM 객체와 이벤트 객체 등은 브라우저 간 호환성이 떨어져 크로스 브라우징이 
+                힘들다는 단점이 존재한다. 예로 DOM 객체의 문서 객체 선택자인 nextSibling 선택자는 브라우저마다 문서 객체
+                를 선택했을 때의 결과가 다르다. 이러한 문제를 해결하기 위해 제이쿼리(JQuery)가 도입되었다. 결론적으로 JQ
+                uery란 자바스크립트에서 만든 자바스크립트로 만들어진 다양한 함수들의 집합, 즉 라이브러리 언어이다.
+        -->
+
+        <script src="C:\Web_Plugin\js\jquery.js"></script>
+        <!-- 2. 제이쿼리는 라이브러리이기에 파일을 직접 내려받아 HTML에서 외부 파일을 불러와야 한다. 종류는 2가지이다. 
+        ---------------------------------------------------------------------------------------------------------
+                ※ jquery.js : 소스에 들여쓰기, 줄 바꿈 등이 정리된 비압축 파일로, 제이쿼리 자체 개발에 유용하다.
+                ※ jquery.min.js : 소스에 들여쓰기, 줄 바꿈, 주석 등이 무시된 압축 파일로, 제이쿼리 자체 개발에 적합하
+                                   지는 않으나 용량이 작아 로딩 속도가 빠르다.
+        -->
+
+        <script>
+            $(function(){
+                $("#title").css("color", "red");
+            });
+            /* 3. 선택자를 사용하기 위해서는 문서 객체를 먼저 불러와야 한다. 선택자를 사용하는 방법은 2가지가 같다.
+            -----------------------------------------------------------------------------------------------------
+                  ※ $(document).ready(function(){...context...});
+                  ※ $(function(){...context...});
+                  
+                  Q. 제이쿼리 선택자로 스타일이나 속성을 적용하려면 어떻게 해야할까?
+                  -----------------------------------------------------------------------------------------------
+                     제이쿼리 선택자 역시 CSS 선택자와 마찬가지로 선택한 요소의 디자인 속성을 적용할 때 사용할 수 있다.
+                     HTML에서 작성한 스타일(CSS)과는 다르게 동적으로 스타일을 적용할 수 있다. 기본형은 다음과 같다.
+                     --------------------------------------------------------------------------------------------
+                     ※ 선택한 요소에 지정한 스타일을 적용 --> $("CSS selector").css("스타일 속성명", "값");
+                     ※ 선택한 요소에 지정한 속성을 적용 -->  $("CSS selector").attr("속성명", "값");
+
+                  ※ 제이쿼리의 기본 선택자는 직접 선택자와 인접 관계 선택자로 나뉜다. 아래의 예제를 통해 살펴본다.
+            */
+
+            /* ###################################### JQuery 기본 - 직접 선택자 ##################################### */
+            $(function(){$("*").css("font-style","italic");});
+            /* 4. 전체 선택자 : $("*") --> 모든 요소를 선택한다. */
+            
+            $(function(){$("#id_title").css("text-decoration", "underline");});
+            /* 5. 아이디 선택자 : $("#아이디명") --> id 속성에 지정한 값을 가진 요소를 선택한다. */
+
+            $(function(){$(".class_title").css("text-decoration", "line-through");});
+            /* 6. 클래스 선택자 : $(".클래스명") --> class 속성에 지정한 값을 가진 요소를 선택한다. */
+
+            $(function(){$("h3").css("border", "1px solid blue");});
+            /* 7. 요소 선택자 : $("요소명") --> 지정한 요소명과 일치하는 요소들만 선택한다. */
+
+            $(function(){$("#group_member1, .group_member2").css("text-align","center");});
+            /* 8. 그룹 선택자 : $("선택1, 선택2, ... 선택n") --> 선택1, ..., 선택n에 지정된 요소들을 한 번에 선택한다. */
+
+            $(function(){$("h4.same_id").css("font-style", "normal");});
+            /* 9. 종속 선택자 : $("p.txt_1") or $("p#txt_1") --> <p> 요소 중 class 값이 txt_1인 요소 또는 id 값이
+                               txt_1인 요소를 선택한다. 
+            */
+            /* ##################################################################################################### */
+            
+            /* #################################### JQuery 기본 - 인접 관계 선택자 ################################### */
+            $(function(){$("#list_1-2").parent().css("text-decoration", "line-through");});
+            /* 10. 부모 요소 선택자 : $("요소 선택").parent() --> 선택한 요소의 부모 요소를 선택한다. */
+
+            $(function(){$("#ul_wrap #list_1-3").css("color", "red");});
+            /* 11. 하위 요소 선택자 : $("요소 선택 하위 요소") --> 선택한 요소에 지정한 하위 요소를 선택한다. */
+
+            $(function(){$("#ul_wrap > #list_1-4").css("color", "blue");});
+            /* 12. 자식 요소 선택자 : $("요소 선택 > 자식 요소") --> 선택한 요소 기준 자식 관계에 지정한 요소만 선택한다. */
+
+            $(function(){$("#list_2").next().css("color", "green");});
+            /* 13. 동생 다음 요소 선택자 : $("요소 선택").next() --> 선택한 요소의 다음 요소를 선택한다. */
+
+            $(function(){$("#list_3").prev().css("color", "orange");});
+            /* 14. 형 이전 요소 선택자 : $("요소 선택").prev() --> 선택한 요소의 바로 이전 요소를 선택한다.*/
+
+            $(function(){$("#ul_wrap").siblings().css("font-style", "normal");});
+            /* 15. 전체 형제 요소 선택자 : $("#box_1").siblings() --> id 값이 box_1인 요소의 형제 요소 전체를 선택한다. */
+            
+            $(function(){$("#context").closest("div").css("border", "1px solid violet");});
+            /* 16. 가장 가까운 상위 요소 선택자 : $("요소 선택").closest("<p>") --> 선택한 요소의 상위 요소 중 가장 가까운 
+                   태그인 <p>를 선택한다.
+            */
+            /* ###################################################################################################### */
+
+            $(function(){$("#chaining").css("text-align", "right").css("border", "5px dotted green");});
+            /* 17. 제이쿼리에서는 한 객체에 다양한 메소드를 이어서 사용할 수 있다. 이를 체이닝 기법이라 한다. */
+
+        </script>
+    </head>
+
+    <body>
+        <h4 id="title">Welcome to JQuery</h4><hr>
+
+        <h4>Whole selector</h4><hr>
+        <h4 id="id_title">id selector</h4><hr>
+        <h4 class="class_title">Class selector</h4><hr>
+
+        <h3>Tag name selector</h3>
+        <h3>Tag name selector2</h3><hr>
+
+        <h4 id="group_member1">Group selector_1</h4>
+        <h4 class="group_member2">Group selector_2</h4><hr>
+
+        <h5 class="same_id">Dependent selector_1</h3>
+        <h4 class="same_id">Dependent selector_2</h4><hr>
+
+        <h3 id=chaining>Chaining</h3><hr>
+
+        <ol id="ol_wrap">
+            <li id="list_1">List 1
+                <ul id="ul_wrap">
+                    <li id="list_1-2">List 1-2</li>
+                    <li id="list_1-3">List 1-3</li>
+                    <li id="list_1-4">List 1-4</li>
+                </ul>
+            </li>
+            <li id="list_2">List 2
+                <div>
+                    <div>
+                        <p id="context">Context</p>
+                    </div>
+                </div>
+            </li>
+            <li id="list_3">List 3</li>
+            <li id="list_4">List 4</li>
+        </ol>
+    </body>
+</html>
