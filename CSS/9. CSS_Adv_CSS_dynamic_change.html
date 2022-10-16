@@ -27,6 +27,8 @@
                 animation-name : rgb_bomb;
                 animation-duration : 3s;
                 animation-iteration-count : 1;
+                animation-play-state: running;
+                animation-direction: normal;
                 /* 59. 애니메이션 관련 CSS 프로퍼티는 여러 가지가 있으나. 대표적인 것 3개만 본다. 
                 ------------------------------------------------------------------------------------------
                        ※ animation-name : @keyframes의 name을 지정한다.
@@ -36,7 +38,10 @@
             }
 
             span{
-                transition : font-size 5s;
+                transition-property: font-size;
+                transition-duration: 5s;
+                transition-timing-function: ease-in;
+
                 /* 60. transition 프로퍼티는 HTML 태그에 적용된 CSS 프로퍼티 값이 변할 때, 값의 변화를 서서히 진행시켜
                        1회성 애니메이션 효과를 낸다. 문법은 아래와 같다.
                 -------------------------------------------------------------------------------------------------
